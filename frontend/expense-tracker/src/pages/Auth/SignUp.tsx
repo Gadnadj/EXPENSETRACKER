@@ -19,6 +19,32 @@ const SignUp = (props: Props) => {
     //handle Sign Up form submit
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        let profileImageUrl = '';
+
+        if (!fullName) {
+            setError('Please enter your name.');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            setError('Please provide a valide email address.');
+            return;
+        }
+
+        if (!password) {
+            setError('Please enter a password.');
+            return;
+        }
+
+        if (password.length < 8) {
+            setError('Please enter a password at least 8 characters.');
+            return;
+        }
+
+        setError('');
+
+        //Sign Up API call
     };
     return (
         <AuthLayout>
@@ -67,6 +93,12 @@ const SignUp = (props: Props) => {
 
                     </div>
 
+                    {
+                        error && (
+                            <p className='text-red-500 text-xs pb-2.5'>{error}</p>
+                        )
+                    }
+
                     <button
                         onClick={handleSignUp}
                         className='btn-primary'
@@ -74,7 +106,7 @@ const SignUp = (props: Props) => {
                         Create Account
                     </button>
 
-                    <p className='text-[13px] text-slate-800 mt-3'>Have already an account?{' '}
+                    <p className='text-[13px] text-slate-800 mt-3'>Already have an account?{' '}
                         <Link className='font-medium text-primary underline' to='/login'>
                             Sign In
                         </Link>
