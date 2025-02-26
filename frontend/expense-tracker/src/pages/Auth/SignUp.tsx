@@ -66,6 +66,19 @@ const SignUp = (props: Props) => {
 
 
                     </div>
+
+                    <button
+                        onClick={handleSignUp}
+                        className='btn-primary'
+                        type='submit'>
+                        Create Account
+                    </button>
+
+                    <p className='text-[13px] text-slate-800 mt-3'>Have already an account?{' '}
+                        <Link className='font-medium text-primary underline' to='/login'>
+                            Sign In
+                        </Link>
+                    </p>
                 </form>
             </div>
         </AuthLayout>
