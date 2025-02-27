@@ -10,7 +10,7 @@ export const useUserAuth = () => {
 
     useEffect(() => {
         if (user) return;
- 
+
         let isMouted = true;
 
         const fetchUserInfo = async () => {

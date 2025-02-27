@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { useUser } from '../../hooks/useUser';
 import Navbar from './Navbar';
 import SideMenu from './SideMenu';
@@ -11,6 +11,7 @@ type Props = {
 const DashboardLayout = ({ children, activeMenu }: Props) => {
 
     const { user } = useUser();
+    console.log(user);
 
     return (
         <div className=''>
