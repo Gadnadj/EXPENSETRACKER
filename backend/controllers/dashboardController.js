@@ -33,13 +33,17 @@ export const getDashboardData = async (req, res) => {
         //Get expense transactions in the last 30 days
         const last30DaysExpenseTransactions = await Expense.find({
             userId,
-            date: { $gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) }
+            date: { $gte: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000) }
         }).sort({ date: -1 });
+
+        console.log(last30DaysExpenseTransactions)
 
         //Get total expense for last 30 days.
         const expenseLast30Days = last30DaysExpenseTransactions.reduce(
             (sum, transaction) => sum + transaction.amount, 0
         );
+
+        console.log(expenseLast30Days);
 
         //Fetch last 5 transactions (income + expenses)
         const lastTransactions = [

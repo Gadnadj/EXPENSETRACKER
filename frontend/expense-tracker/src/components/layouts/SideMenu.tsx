@@ -2,6 +2,7 @@ import React from 'react';
 import { SIDE_MENU_DATA } from '../../utils/data';
 import { useUser } from '../../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
+import CharAvatar from '../Cards/CharAvatar';
 
 type Props = {
     activeMenu: string;
@@ -34,7 +35,7 @@ const SideMenu = ({ activeMenu }: Props) => {
                     user?.profileImageUrl ? (
                         <img src={user.profileImageUrl || ''} alt="Profile Image" className='w-20 h-20 bg-slate-400 rounded-full' />
                     ) : (
-                        <></>
+                        <CharAvatar fullName={user?.fullName} width='w-20' height='h-20' style='text-xl' />
                     )
                 }
 
@@ -55,7 +56,7 @@ const SideMenu = ({ activeMenu }: Props) => {
                     </button>
                 ))
             }
-        </div>
+        </div >
     );
 };
 
