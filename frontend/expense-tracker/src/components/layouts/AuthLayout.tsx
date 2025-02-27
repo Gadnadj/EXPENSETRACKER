@@ -32,7 +32,7 @@ const AuthLayout = ({ children }: Props) => {
                     </div>
                 </div>
 
-                <img className='w-64 md:w-[90%] xl:w-[90%] absolute bottom-10 shadow-lg shadow-blue-400/15' src={CARD_2} />
+                <img className='w-64 md:w-[90%] xl:w-[50%] absolute bottom-10 shadow-lg shadow-blue-400/15' src={CARD_2} />
             </div>
         </div>
     );
