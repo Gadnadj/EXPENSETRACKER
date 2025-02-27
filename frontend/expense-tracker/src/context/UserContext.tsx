@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useState } from 'react';
+import React, { createContext, ReactNode, useState, useEffect } from 'react';
 import { User } from '../utils/types';
 
 interface childrenType {
@@ -15,7 +15,20 @@ interface UserContextType {
 export const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const UserProvider = ({ children }: childrenType) => {
-    const [user, setUser] = useState<User | null>(null);
+    // Initialize state with data from localStorage
+    const [user, setUser] = useState<User | null>(() => {
+        const savedUser = localStorage.getItem('user');
+        return savedUser ? JSON.parse(savedUser) : null;
+    });
+
+    // Update localStorage when user changes
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('user');
+        }
+    }, [user]);
 
     //Function to update user data
     const updateUser = (userData: User) => {
@@ -25,6 +38,8 @@ const UserProvider = ({ children }: childrenType) => {
     //Function to clear user data on logout
     const clearUser = () => {
         setUser(null);
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
     };
 
     return (

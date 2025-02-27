@@ -1,10 +1,15 @@
-import React from 'react';
+import DashboardLayout from '../../components/layouts/DashboardLayout';
 
-type Props = {}
 
-const Home = (props: Props) => {
+const Home = () => {
     return (
-        <div>Home</div>
+        <div>
+            <DashboardLayout activeMenu='Dashboard'>
+                <div className="my-5 mx-auto">
+
+                </div>
+            </DashboardLayout>
+        </div>
     );
 };
 
