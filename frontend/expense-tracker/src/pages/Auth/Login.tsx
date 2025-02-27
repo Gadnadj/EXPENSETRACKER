@@ -5,6 +5,7 @@ import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
+import { useUser } from '../../hooks/useUser';
 
 
 const Login = () => {
@@ -13,6 +14,8 @@ const Login = () => {
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
+
+    const { updateUser } = useUser();
 
     //handle login form submit
     const handleLogin = async (e: React.FormEvent) => {
@@ -45,6 +48,7 @@ const Login = () => {
 
             if (token) {
                 localStorage.setItem('token', token);
+                updateUser(user);
                 navigate('/dashboard');
             }
         } catch (error: any) {
@@ -56,7 +60,7 @@ const Login = () => {
             }
         }
     };
-    
+
     return (
         <AuthLayout>
             <div className='lg:w-[100%] h-3/4 md:h-full flex flex-col justify-center'>
