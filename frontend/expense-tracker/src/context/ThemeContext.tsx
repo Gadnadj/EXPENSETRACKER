@@ -11,7 +11,7 @@ interface Props {
 
 export const ThemeContext = createContext<ThemeContextType>({
     isDarkMode: false,
-    toggleTheme: () => {},
+    toggleTheme: () => { }
 });
 
 export const ThemeProvider = ({ children }: Props) => {

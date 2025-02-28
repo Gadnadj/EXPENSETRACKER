@@ -1,48 +1,73 @@
-import { LuUtensils, LuTrendingUp, LuTrendingDown, LuTrash2 } from 'react-icons/lu';
+import { useContext } from 'react';
+import { LuUtensils, LuTrash2, LuTrendingUp, LuTrendingDown } from 'react-icons/lu';
+import { ThemeContext } from '../../context/ThemeContext';
 
 type Props = {
     title: string;
-    icon: string;
+    icon?: string;
     date: string;
     amount: number;
-    type: string | undefined;
+    type: 'income' | 'expense';
     hideDeleteBtn?: boolean;
-    onDelete?: () => void
+    onDelete?: () => void;
 }
 
 const TransactionInfoCard = ({ title, icon, date, amount, type, hideDeleteBtn, onDelete }: Props) => {
+    const { isDarkMode } = useContext(ThemeContext);
 
     const getAmountStyles = () => {
         if (type === 'income') {
-            return 'bg-green-50 dark:bg-green-900/30 text-green-500 dark:text-green-400';
+            return isDarkMode 
+                ? 'bg-green-900/30 text-green-400' 
+                : 'bg-green-50 text-green-500';
         }
-        return 'bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400';
+        return isDarkMode 
+            ? 'bg-red-900/30 text-red-400' 
+            : 'bg-red-50 text-red-500';
     };
 
     return (
-        <div className='group relative flex items-center gap-4 p-3 rounded-lg hover:bg-gray-100/60 dark:hover:bg-gray-700/50 transition-colors duration-300'>
-            <div className='w-12 h-12 flex items-center justify-center text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 rounded-full transition-colors duration-300'>
+        <div className={`group relative flex items-center gap-4 p-3 rounded-lg transition-colors duration-300 ${
+            isDarkMode 
+                ? 'hover:bg-gray-700/50' 
+                : 'hover:bg-gray-100/60'
+        }`}>
+            <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors duration-300 ${
+                isDarkMode 
+                    ? 'bg-gray-800 text-gray-200' 
+                    : 'bg-gray-100 text-gray-800'
+            }`}>
                 {icon ? (
-                    <img src={icon} alt={icon} className='w-6 h-6' />
+                    <img src={icon} alt={title} className='w-6 h-6' />
                 ) : (
                     <LuUtensils className='w-6 h-6' />
-                )
-                }
+                )}
             </div>
 
             <div className='flex-1 flex items-center justify-between'>
                 <div>
-                    <p className='text-sm text-gray-700 dark:text-gray-200 font-medium transition-colors duration-300'>
+                    <p className={`text-sm font-medium transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-200' : 'text-gray-700'
+                    }`}>
                         {title}
                     </p>
-                    <p className='text-xs text-gray-400 dark:text-gray-500 mt-1 transition-colors duration-300'>
+                    <p className={`text-xs mt-1 transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-500' : 'text-gray-400'
+                    }`}>
                         {date}
                     </p>
                 </div>
 
                 <div className='flex items-center gap-2'>
                     {hideDeleteBtn && (
-                        <button className='text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer' onClick={onDelete}>
+                        <button 
+                            className={`opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer ${
+                                isDarkMode 
+                                    ? 'text-gray-500 hover:text-red-400' 
+                                    : 'text-gray-400 hover:text-red-500'
+                            }`} 
+                            onClick={onDelete}
+                        >
                             <LuTrash2 size={18} />
                         </button>
                     )}

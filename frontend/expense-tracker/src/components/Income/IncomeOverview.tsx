@@ -1,8 +1,9 @@
+import { useContext, useEffect, useState } from 'react';
 import { LuPlus } from 'react-icons/lu';
 import CustomBarChart from '../Charts/CustomBarChart';
-import { useEffect, useState } from 'react';
 import { Income } from '../../utils/types';
 import { prepareIncomeBarChartdata } from '../../utils/helper';
+import { ThemeContext } from '../../context/ThemeContext';
 
 type Props = {
     transactions: Income[];
@@ -10,39 +11,50 @@ type Props = {
 }
 
 const IncomeOverview = ({ transactions, onAddIncome }: Props) => {
-
+    const { isDarkMode } = useContext(ThemeContext);
     const [chartData, setChartData] = useState<{ month: string; amount: number; source: string; }[]>([]);
 
     useEffect(() => {
         const result = prepareIncomeBarChartdata(transactions);
         setChartData(result);
-
         return () => { };
     }, [transactions]);
 
     return (
-        <div className='card'>
+        <div className={`p-6 rounded-2xl shadow-md border transition-colors duration-300 ${
+            isDarkMode 
+                ? 'bg-gray-800 border-gray-700 shadow-none' 
+                : 'bg-white shadow-gray-100 border-gray-200/50'
+        }`}>
             <div className='flex items-center justify-between'>
-                <div className=''>
-                    <h5 className='text-lg'>
+                <div>
+                    <h5 className={`text-lg font-medium transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>
                         Income Overview
                     </h5>
-                    <p className='text-xs text-gray-400 mt-0.5'>
+                    <p className={`text-xs mt-0.5 transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`}>
                         Track your earning over time and analyze your income trends.
                     </p>
                 </div>
 
-                <button className='add-btn' onClick={onAddIncome}>
-                    <LuPlus className='text-lg cursor-pointer' />
+                <button 
+                    className={`flex items-center gap-1.5 text-xs md:text-sm font-medium whitespace-nowrap px-4 py-2 rounded-lg cursor-pointer transition-colors duration-300 ${
+                        isDarkMode 
+                            ? 'text-purple-400 hover:text-gray-200 bg-gray-800 hover:bg-gray-700 border-gray-700' 
+                            : 'text-purple-600 hover:text-gray-700 bg-purple-50 hover:bg-gray-50 border-purple-100'
+                    }`} 
+                    onClick={onAddIncome}
+                >
+                    <LuPlus className='text-lg' />
                     Add Income
                 </button>
-
             </div>
 
             <div className='mt-10'>
-                <CustomBarChart
-                    data={chartData}
-                />
+                <CustomBarChart data={chartData} />
             </div>
         </div>
     );
