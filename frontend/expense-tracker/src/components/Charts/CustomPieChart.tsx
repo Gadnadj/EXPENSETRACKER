@@ -42,8 +42,8 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }: Pr
 
             {showTextAnchor && (
                 <div className="absolute flex flex-col items-center justify-center top-[175px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
-                    <p className="text-gray-600 text-sm mb-1">{label}</p>
-                    <p className="text-2xl font-semibold text-gray-800">{totalAmount}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300 mb-1">{label}</p>
+                    <p className="text-2xl font-semibold text-gray-800 dark:text-white transition-colors duration-300">{totalAmount}</p>
                 </div>
             )}
         </div>

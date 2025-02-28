@@ -12,8 +12,8 @@ type Props = {
 const RecentTransactions = ({ transactions, onSeeMore }: Props) => {
     return (
         <div className='card'>
-            <div className='flex items-center justify-between '>
-                <h5 className='text-lg'>
+            <div className='flex items-center justify-between'>
+                <h5 className='text-lg text-gray-900 dark:text-white transition-colors duration-300'>
                     Recent Transactions
                 </h5>
 

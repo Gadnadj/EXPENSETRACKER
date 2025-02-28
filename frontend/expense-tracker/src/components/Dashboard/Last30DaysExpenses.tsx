@@ -23,7 +23,7 @@ const Last30DaysExpenses = ({ data }: Props) => {
     return (
         <div className='card col-span-1'>
             <div className='flex items-center justify-between'>
-                <h5 className='text-lg'>
+                <h5 className='text-lg text-gray-900 dark:text-white transition-colors duration-300'>
                     Last 30 Days Expenses
                 </h5>
             </div>
@@ -31,7 +31,7 @@ const Last30DaysExpenses = ({ data }: Props) => {
             {chartData.length > 0 ? (
                 <CustomBarChart data={chartData} />
             ) : (
-                <div className="flex items-center justify-center h-64 text-gray-500">
+                <div className="flex items-center justify-center h-64 text-gray-500 dark:text-gray-400 transition-colors duration-300">
                     No expense data available
                 </div>
             )}

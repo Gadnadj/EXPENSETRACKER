@@ -19,7 +19,7 @@ const FinanceOverview = ({ totalBalance, totalIncome, totalExpense }: Props) => 
     return (
         <div className='card'>
             <div className='flex items-center justify-between'>
-                <h5 className='text-lg'>
+                <h5 className='text-lg text-gray-900 dark:text-white'>
                     Financial Overview
                 </h5>
             </div>
