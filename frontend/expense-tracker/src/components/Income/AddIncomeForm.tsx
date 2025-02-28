@@ -9,16 +9,20 @@ type Props = {
 
 const AddIncomeForm = ({ onAddIncome }: Props) => {
 
-    const [incomeData, setIncomeData] = useState<{ source: string, amount: string, date: string, icon: string }>({
+    const [incomeData, setIncomeData] = useState<{ source: string, amount: string, date: Date, icon: string }>({
         source: '',
         amount: '',
-        date: '',
+        date: new Date(),
         icon: ''
     });
 
     const handleChange = (key: string, value: any) => {
-        setIncomeData({ ...incomeData, [key]: value });
+        setIncomeData((prev) => ({
+            ...prev,
+            [key]: key === 'date' ? new Date(value) : value
+        }));
     };
+
 
     return (
         <div>
@@ -45,15 +49,15 @@ const AddIncomeForm = ({ onAddIncome }: Props) => {
             />
 
             <Input
-                value={incomeData.date}
-                onChange={({ target }) => handleChange('Date', target.value)}
+                value={incomeData.date.toISOString().split('T')[0]}
+                onChange={({ target }) => handleChange('date', target.value)}
                 label='Date'
                 placeholder=''
                 type='date'
             />
 
             <div className='flex justify-end mt-6'>
-                <button type='button' className='add-btn add-btn-fill' onClick={() => onAddIncome(incomeData)}>
+                <button type='button' className='add-btn add-btn-fill' onClick={() => onAddIncome({ ...incomeData, amount: parseInt(incomeData.amount), date: new Date(incomeData.date) })}>
                     Add Income
                 </button>
             </div>

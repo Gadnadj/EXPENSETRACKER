@@ -7,16 +7,13 @@ type Props = {
     amount: number;
     type: string | undefined;
     hideDeleteBtn?: boolean;
+    onDelete?: () => void
 }
 
-const TransactionInfoCard = ({ title, icon, date, amount, type, hideDeleteBtn }: Props) => {
+const TransactionInfoCard = ({ title, icon, date, amount, type, hideDeleteBtn, onDelete }: Props) => {
 
     const getAmountStyles = () => {
         return type === 'income' ? 'bg-green-50 text-green-500' : 'bg-red-50 text-red-500';
-    };
-
-    const onDelete = () => {
-
     };
 
     return (

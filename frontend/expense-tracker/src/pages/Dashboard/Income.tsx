@@ -6,6 +6,8 @@ import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import Modal from '../../components/layouts/Modal';
 import AddIncomeForm from '../../components/Income/AddIncomeForm';
+import toast from 'react-hot-toast';
+import IncomeList from '../../components/Income/IncomeList';
 
 type Props = {}
 
@@ -13,7 +15,7 @@ const Income = (props: Props) => {
 
     const [incomeData, setIncomeData] = useState<Income[]>([]);
     const [loading, setLoading] = useState(false);
-    const [openDeleteAlert, setOpenDeleteAlert] = useState<{ show: boolean, data: null }>({
+    const [openDeleteAlert, setOpenDeleteAlert] = useState<{ show: boolean, data: string | null }>({
         show: false,
         data: null
     });
@@ -23,7 +25,35 @@ const Income = (props: Props) => {
     //Get All Income Details
 
 
-    const handleAddIncome = async (income: Income) => { };
+    const handleAddIncome = async (income: Income) => {
+        const { source, amount, date, icon } = income;
+        if (!source.trim()) {
+            toast.error('Source is required.');
+            return;
+        }
+
+        if (!amount || isNaN(amount) || Number(amount) <= 0) {
+            toast.error('Amount should be a valid number greater than 0.');
+            return;
+        }
+
+        if (!date) {
+            toast.error('Date is required.');
+            return;
+        }
+
+        try {
+            await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
+                source, amount, date, icon
+            });
+
+            setOpenAddIncomeModal(false);
+            toast.success('Income added successfully.');
+            // fetchIncomeDetails();
+        } catch (error) {
+            console.error('Error adding income: ', error);
+        }
+    };
 
     const deleteIncome = async (id: string) => { };
 
@@ -60,6 +90,13 @@ const Income = (props: Props) => {
                             onAddIncome={() => setOpenAddIncomeModal(true)}
                         />
                     </div>
+
+                    <IncomeList
+                        transactions={incomeData}
+                        onDelete={(id: string) => { setOpenDeleteAlert({ show: true, data: id }); }}
+                        onDownload={handleDownloadIncome}
+                    />
+
                 </div>
 
                 <Modal
