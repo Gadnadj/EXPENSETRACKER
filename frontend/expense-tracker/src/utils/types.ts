@@ -32,11 +32,16 @@ export interface DashboardTypes {
     totalExpense: number;
     last30DaysExpenses: {
         total: number;
-        transactions: Expense
+        transactions: Expense[]
     };
     last60DaysIncome: {
         total: number;
-        transactions: Income
+        transactions: Income[]
     };
     recentTransactions: Expense[] | Income[];
 }
+
+// export interface AllLast30DaysExpenses {
+//     total: number;
+//     transactions: Expense
+// }

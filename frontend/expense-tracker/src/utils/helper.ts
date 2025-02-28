@@ -1,3 +1,5 @@
+import { Expense } from './types';
+
 export const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -25,4 +27,13 @@ export const addThousandsSeparator = (num: number) => {
     return fractionalPart
         ? `${formattedInteger}.${fractionalPart}`
         : formattedInteger;
+};
+
+export const prepareExpenseBarChartData = (data: Expense[] | undefined) => {
+    const chartData = data?.map((item) => ({
+        category: item?.category,
+        amount: item?.amount
+    }));
+
+    return chartData;
 };
