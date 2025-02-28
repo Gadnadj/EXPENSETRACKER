@@ -19,7 +19,6 @@ export const getDashboardData = async (req, res) => {
             { $group: { _id: null, total: { $sum: "$amount" } } }
         ])
 
-        console.log(totalExpense)
 
 
         //Get income transactions in the last 60 days

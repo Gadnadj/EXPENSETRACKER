@@ -4,7 +4,6 @@ import xlsx from 'xlsx'
 //add new expense
 export const addExpense = async (req, res) => {
     const userId = req.user.id;
-    console.log(userId);
     try {
         const { icon, category, amount, date } = req.body;
         if (!category || !amount || !date) {
