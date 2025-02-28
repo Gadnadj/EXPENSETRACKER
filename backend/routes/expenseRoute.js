@@ -7,6 +7,6 @@ const router = express.Router();
 router.post('/add', protect, addExpense);
 router.get('/get', protect, getAllExpense);
 router.get('/expenseexcel', protect, downloadExpenseExcel);
-router.get('/:id', protect, deleteExpense);
+router.delete('/:id', protect, deleteExpense);
 
 export default router;
