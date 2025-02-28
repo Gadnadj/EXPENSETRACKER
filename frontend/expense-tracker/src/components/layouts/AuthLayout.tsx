@@ -2,6 +2,7 @@ import React, { ReactNode, useContext } from 'react';
 import CARD_2 from '../../assets/images/card2.png';
 import { LuTrendingUpDown } from 'react-icons/lu';
 import { ThemeContext } from '../../context/ThemeContext';
+import ThemeToggle from '../ThemeToggle';
 
 type Props = {
     children: ReactNode
@@ -15,11 +16,14 @@ const AuthLayout = ({ children }: Props) => {
             <div className={`w-screen h-screen xl:w-[90vh] md:w-[60vh] px-12 pt-8 pb-12 transition-colors duration-300 ${
                 isDarkMode ? 'bg-gray-900' : 'bg-white'
             }`}>
-                <h2 className={`text-lg font-medium transition-colors duration-300 ${
-                    isDarkMode ? 'text-white' : 'text-black'
-                }`}>
-                    Expense Tracker
-                </h2>
+                <div className="flex items-center justify-between mb-8">
+                    <h2 className={`text-lg font-medium transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-black'
+                    }`}>
+                        Expense Tracker
+                    </h2>
+                    <ThemeToggle />
+                </div>
                 {children}
             </div>
 
