@@ -31,9 +31,13 @@ export const addThousandsSeparator = (num: number) => {
 };
 
 export const prepareExpenseBarChartData = (data: Expense[] | undefined) => {
-    const chartData = data?.map((item) => ({
-        category: item?.category,
-        amount: item?.amount
+    if (!data || !Array.isArray(data)) {
+        return [];
+    }
+
+    const chartData = data.map((item) => ({
+        category: item?.category || 'Unknown',
+        amount: item?.amount || 0
     }));
 
     return chartData;

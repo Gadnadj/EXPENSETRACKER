@@ -8,16 +8,17 @@ type Props = {
 }
 
 const Last30DaysExpenses = ({ data }: Props) => {
-
-    const [charData, setChartData] = useState<{ category: string; amount: number; }[]>([]);
+    const [chartData, setChartData] = useState<{ category: string; amount: number; }[]>([]);
 
     useEffect(() => {
+        if (!data) {
+            setChartData([]);
+            return;
+        }
+
         const result = prepareExpenseBarChartData(data);
-        setChartData(result ?? []);
-
-        return () => { };
+        setChartData(result);
     }, [data]);
-
 
     return (
         <div className='card col-span-1'>
@@ -27,10 +28,13 @@ const Last30DaysExpenses = ({ data }: Props) => {
                 </h5>
             </div>
 
-            <CustomBarChart
-                data={charData}
-            />
-
+            {chartData.length > 0 ? (
+                <CustomBarChart data={chartData} />
+            ) : (
+                <div className="flex items-center justify-center h-64 text-gray-500">
+                    No expense data available
+                </div>
+            )}
         </div>
     );
 };

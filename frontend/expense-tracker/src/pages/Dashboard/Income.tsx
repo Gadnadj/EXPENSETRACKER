@@ -9,21 +9,16 @@ import AddIncomeForm from '../../components/Income/AddIncomeForm';
 import toast from 'react-hot-toast';
 import IncomeList from '../../components/Income/IncomeList';
 import DeleteAlert from '../../components/DeleteAlert';
-
+import Loading from '../../components/Loading';
 
 const Income = () => {
-
     const [incomeData, setIncomeData] = useState<Income[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [openDeleteAlert, setOpenDeleteAlert] = useState<{ show: boolean, data: string | null }>({
         show: false,
         data: null
     });
-    0;
     const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
-
-    //Get All Income Details
-
 
     const handleAddIncome = async (income: Income) => {
         const { source, amount, date, icon } = income;
@@ -52,18 +47,18 @@ const Income = () => {
             fetchIncomeDetails();
         } catch (error) {
             console.error('Error adding income: ', error);
+            toast.error('Failed to add income. Please try again.');
         }
     };
 
     const deleteIncome = async (id: string) => {
         try {
             await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
-
             setOpenDeleteAlert({ show: false, data: null });
             toast.success('Income details deleted successfully.');
             fetchIncomeDetails();
         } catch (error) {
-            console.log('Error deleting income: ', error);
+            console.error('Error deleting income: ', error);
             toast.error('Failed to delete income');
         }
     };
@@ -74,7 +69,6 @@ const Income = () => {
                 responseType: 'blob'
             });
 
-            //Create URl for the blob
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
@@ -83,34 +77,35 @@ const Income = () => {
             link.click();
             link.parentNode?.removeChild(link);
             window.URL.revokeObjectURL(url);
+            
+            toast.success('Income details downloaded successfully.');
         } catch (error) {
-            console.log('Error downloading income details: ', error);
+            console.error('Error downloading income details: ', error);
             toast.error('Failed to download income details. Please try again.');
         }
     };
 
     const fetchIncomeDetails = async () => {
-        if (loading) return;
-
-        setLoading(true);
-
         try {
             const response = await axiosInstance.get(`${API_PATHS.INCOME.GET_ALL_INCOME}`);
             if (response.data) {
                 setIncomeData(response.data);
             }
         } catch (error) {
-            console.log('Something went wrong. Please try again.', error);
+            console.error('Error fetching income details: ', error);
+            toast.error('Failed to fetch income details. Please try again.');
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-
         fetchIncomeDetails();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <DashboardLayout activeMenu='Income'>
@@ -128,7 +123,6 @@ const Income = () => {
                         onDelete={(id: string) => { setOpenDeleteAlert({ show: true, data: id }); }}
                         onDownload={handleDownloadIncome}
                     />
-
                 </div>
 
                 <Modal
@@ -149,7 +143,6 @@ const Income = () => {
                         onDelete={() => deleteIncome(openDeleteAlert.data ?? '')}
                     />
                 </Modal>
-
             </div>
         </DashboardLayout>
     );

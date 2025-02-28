@@ -10,21 +10,15 @@ type Props = {
 const SideMenu = ({ activeMenu }: Props) => {
 
     const { user, clearUser } = useUser();
-
     const navigate = useNavigate();
 
     const handleClick = (route: string) => {
-        if (route === 'logout') {
-            handleLogout();
+        if (route === '/logout') {
+            clearUser();
+            navigate('/login');
             return;
         }
-
         navigate(route);
-    };
-
-    const handleLogout = () => {
-        clearUser();
-        navigate('/login');
     };
 
     return (
