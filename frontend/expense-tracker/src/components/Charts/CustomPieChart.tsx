@@ -14,7 +14,7 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }: Pr
     return (
         <div className="relative">
             <ResponsiveContainer width='100%' height={380}>
-                <PieChart>
+                <PieChart className="relative z-20">
                     <Pie
                         data={data}
                         dataKey='amount'
@@ -32,13 +32,16 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }: Pr
                             />
                         ))}
                     </Pie>
-                    <Tooltip content={CustomTooltip} />
+                    <Tooltip 
+                        content={CustomTooltip}
+                        wrapperStyle={{ zIndex: 30 }} 
+                    />
                     <Legend content={CustomLegend} />
                 </PieChart>
             </ResponsiveContainer>
 
             {showTextAnchor && (
-                <div className="absolute flex flex-col items-center justify-center top-[175px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                <div className="absolute flex flex-col items-center justify-center top-[175px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
                     <p className="text-gray-600 text-sm mb-1">{label}</p>
                     <p className="text-2xl font-semibold text-gray-800">{totalAmount}</p>
                 </div>
