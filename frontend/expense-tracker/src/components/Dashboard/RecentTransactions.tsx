@@ -1,14 +1,15 @@
-import React from 'react';
 import { Expense, Income } from '../../utils/types';
 import { LuArrowRight } from 'react-icons/lu';
+import moment from 'moment';
+import TransactionInfoCard from '../Cards/TransactionInfoCard';
 
 type Props = {
-    transaction: Expense | Income | undefined;
+    transactions: Expense[] | Income[] | undefined;
 
     onSeeMore: () => void;
 }
 
-const RecentTransactions = ({ transaction, onSeeMore }: Props) => {
+const RecentTransactions = ({ transactions, onSeeMore }: Props) => {
     return (
         <div className='card'>
             <div className='flex items-center justify-between '>
@@ -21,7 +22,19 @@ const RecentTransactions = ({ transaction, onSeeMore }: Props) => {
                 </button>
             </div>
 
-
+            <div className='mt-6'>
+                {transactions?.slice(0, 5)?.map((item) => (
+                    <TransactionInfoCard
+                        key={item._id}
+                        title={'type' in item && item.type === 'expense' ? (item as Expense).category : (item as Income).source}
+                        icon={item.icon ?? ''}
+                        date={moment(item.date).format('Do MMM YYYY')}
+                        amount={item.amount}
+                        type={item.type}
+                        hideDeleteBtn
+                    />
+                ))}
+            </div>
         </div>
     );
 };

@@ -7,19 +7,23 @@ export interface User {
 }
 
 export interface Expense {
+    _id?: string;
     userId?: string;
     icon?: string;
     category: string;
     amount: number;
     date: Date;
+    type?: string;
 }
 
 export interface Income {
+    _id?: string;
     userId?: string;
     icon?: string;
     source: string;
     amount: number;
     date: Date;
+    type?: string;
 }
 
 export interface DashboardTypes {
@@ -34,5 +38,5 @@ export interface DashboardTypes {
         total: number;
         transactions: Income
     };
-    recentTransactions: Expense | Income;
+    recentTransactions: Expense[] | Income[];
 }
