@@ -4,6 +4,8 @@ import IncomeOverview from '../../components/Income/IncomeOverview';
 import type { Income } from '../../utils/types';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
+import Modal from '../../components/layouts/Modal';
+import AddIncomeForm from '../../components/Income/AddIncomeForm';
 
 type Props = {}
 
@@ -59,6 +61,15 @@ const Income = (props: Props) => {
                         />
                     </div>
                 </div>
+
+                <Modal
+                    isOpen={openAddIncomeModal}
+                    onClose={() => setOpenAddIncomeModal(false)}
+                    title='Add Income'
+                >
+                    <AddIncomeForm onAddIncome={handleAddIncome} />
+                </Modal>
+
             </div>
         </DashboardLayout>
     );
