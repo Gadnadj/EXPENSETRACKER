@@ -54,7 +54,7 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }: Pr
                                 textAnchor='middle'
                                 fill='#333'
                                 fontSize='24px'
-                                fontWeight='semi-bold'
+                                fontWeight='600'
                             >
                                 {totalAmount}
                             </text>
