@@ -48,3 +48,13 @@ export const prepareIncomeBarChartdata = (data: Income[] | undefined) => {
     }));
     return chartData;
 };
+
+export const prepareExpenseLineChartData = (data: Expense[] | undefined) => {
+    const sortedData: Expense[] = [...(data ?? [])].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    const chartData = sortedData.map((item) => ({
+        month: moment(item?.date).format('Do MMM'),
+        amount: item?.amount,
+        category: item?.category
+    }));
+    return chartData;
+};
