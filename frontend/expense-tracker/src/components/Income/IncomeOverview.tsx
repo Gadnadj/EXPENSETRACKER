@@ -21,8 +21,29 @@ const IncomeOverview = ({ transactions, onAddIncome }: Props) => {
     }, [transactions]);
 
     return (
-        <div>
+        <div className='card'>
+            <div className='flex items-center justify-between'>
+                <div className=''>
+                    <h5 className='text-lg'>
+                        Income Overview
+                    </h5>
+                    <p className='text-xs text-gray-400 mt-0.5'>
+                        Track your earning over time and analyze your income trends.
+                    </p>
+                </div>
 
+                <button className='add-btn' onClick={onAddIncome}>
+                    <LuPlus className='text-lg cursor-pointer' />
+                    Add Income
+                </button>
+
+            </div>
+
+            <div className='mt-10'>
+                <CustomBarChart
+                    data={chartData}
+                />
+            </div>
         </div>
     );
 };

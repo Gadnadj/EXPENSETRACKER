@@ -1,6 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 type Props = {
-    data: { category: string, amount: number }[]
+    data: { category: string, amount: number }[] | { month: string; amount: number; source: string; }[]
 }
 
 const CustomBarChart = ({ data }: Props) => {
@@ -40,9 +40,9 @@ const CustomBarChart = ({ data }: Props) => {
                     <Bar
                         dataKey='amount'
                         fill='#FF8042'
-                        // radius={[10, 10, 0, 0]}
-                        // activeDot={{ r: 8, fill: 'yellow' }}
-                        // activeStyle={{ fill: 'green' }}
+                    // radius={[10, 10, 0, 0]}
+                    // activeDot={{ r: 8, fill: 'yellow' }}
+                    // activeStyle={{ fill: 'green' }}
                     >
                         {data.map((_, index) => (
                             <Cell key={index} fill={getBarColor(index)} />
