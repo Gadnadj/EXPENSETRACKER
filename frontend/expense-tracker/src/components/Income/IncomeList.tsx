@@ -1,4 +1,3 @@
-import React from 'react';
 import { Income } from '../../utils/types';
 import { LuDownload } from 'react-icons/lu';
 import TransactionInfoCard from '../Cards/TransactionInfoCard';
@@ -33,6 +32,7 @@ const IncomeList = ({ transactions, onDelete, onDownload }: Props) => {
                         date={moment(income.date).format('Do MMM YYYY')}
                         amount={income.amount}
                         type='income'
+                        hideDeleteBtn
                         onDelete={() => onDelete(income._id ?? '')}
                     />
                 ))}
