@@ -1,4 +1,3 @@
-import React from 'react';
 import CustomPieChart from '../Charts/CustomPieChart';
 
 type Props = {
