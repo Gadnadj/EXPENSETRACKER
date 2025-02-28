@@ -18,13 +18,13 @@ const CustomLineChart = ({ data }: Props) => {
     const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
         if (active && payload && payload.length) {
             return (
-                <div className={`bg-white shadow-md rounded-lg p-2 border transition-colors duration-300 ${
+                <div className={`p-3 rounded-lg shadow-lg border backdrop-blur-sm transition-all duration-300 ${
                     isDarkMode 
-                        ? 'bg-gray-800 border-gray-700' 
-                        : 'bg-white border-gray-300'
+                        ? 'bg-gray-800/90 border-gray-700 shadow-gray-900/20' 
+                        : 'bg-white/90 border-gray-200 shadow-gray-200/20'
                 }`}>
                     <p className={`text-xs font-semibold mb-1 transition-colors duration-300 ${
-                        isDarkMode ? 'text-purple-400' : 'text-purple-800'
+                        isDarkMode ? 'text-violet-400' : 'text-violet-600'
                     }`}>
                         {payload[0].payload.category}
                     </p>
@@ -38,49 +38,84 @@ const CustomLineChart = ({ data }: Props) => {
                 </div>
             );
         }
+        return null;
     };
 
     return (
-        <div className={`transition-colors duration-300 ${
+        <div className={`w-full h-full p-4 rounded-xl transition-colors duration-300 ${
             isDarkMode ? 'bg-gray-800' : 'bg-white'
         }`}>
-            <ResponsiveContainer
-                width='100%'
-                height={300}
-            >
-                <AreaChart data={data}>
+            <ResponsiveContainer width='100%' height={300}>
+                <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                     <defs>
-                        <linearGradient id='incomeGradient' x1='0' y1='0' x2='0' y2='1'>
-                            <stop offset='5%' stopColor='#875cf5' opacity={0.4} />
-                            <stop offset='95%' stopColor='#875cf5' opacity={0} />
+                        <linearGradient id='expenseGradient' x1='0' y1='0' x2='0' y2='1'>
+                            <stop 
+                                offset='5%' 
+                                stopColor={isDarkMode ? '#7c3aed' : '#875cf5'} 
+                                stopOpacity={0.3} 
+                            />
+                            <stop 
+                                offset='95%' 
+                                stopColor={isDarkMode ? '#7c3aed' : '#875cf5'} 
+                                stopOpacity={0} 
+                            />
                         </linearGradient>
                     </defs>
 
-                    <CartesianGrid stroke='none' />
+                    <CartesianGrid 
+                        strokeDasharray="3 3" 
+                        stroke={isDarkMode ? '#374151' : '#E5E7EB'} 
+                        vertical={false} 
+                    />
+
                     <XAxis 
                         dataKey='month' 
                         tick={{ 
                             fontSize: 12, 
                             fill: isDarkMode ? '#9CA3AF' : '#6B7280'
                         }} 
-                        stroke='none'
+                        stroke={isDarkMode ? '#374151' : '#E5E7EB'}
+                        tickLine={false}
+                        axisLine={false}
+                        dy={10}
                     />
+
                     <YAxis 
                         tick={{ 
                             fontSize: 12, 
                             fill: isDarkMode ? '#9CA3AF' : '#6B7280'
                         }} 
-                        stroke='none'
+                        stroke={isDarkMode ? '#374151' : '#E5E7EB'}
+                        tickLine={false}
+                        axisLine={false}
+                        dx={-10}
                     />
-                    <Tooltip content={<CustomTooltip />} />
+
+                    <Tooltip 
+                        content={<CustomTooltip />} 
+                        cursor={{ 
+                            stroke: isDarkMode ? '#4B5563' : '#E5E7EB' 
+                        }} 
+                    />
 
                     <Area 
                         type='monotone' 
                         dataKey='amount' 
-                        stroke='#875cf5' 
-                        fill='url(#incomeGradient)' 
-                        strokeWidth={3} 
-                        dot={{ r: 3, fill: '#ab8df8' }} 
+                        stroke={isDarkMode ? '#7c3aed' : '#875cf5'} 
+                        strokeWidth={2}
+                        fill='url(#expenseGradient)' 
+                        dot={{ 
+                            r: 4, 
+                            fill: isDarkMode ? '#7c3aed' : '#875cf5',
+                            strokeWidth: 2,
+                            stroke: isDarkMode ? '#1F2937' : '#FFFFFF'
+                        }}
+                        activeDot={{
+                            r: 6,
+                            fill: isDarkMode ? '#7c3aed' : '#875cf5',
+                            strokeWidth: 2,
+                            stroke: isDarkMode ? '#1F2937' : '#FFFFFF'
+                        }}
                     />
                 </AreaChart>
             </ResponsiveContainer>
