@@ -41,7 +41,8 @@ const Home = () => {
 
         fetchDashBoardData();
         return () => { };
-    }, []);
+    }, [loading]);
+    //maybe remove loading !!!
 
 
 
