@@ -18,8 +18,6 @@ const Last30DaysExpenses = ({ data }: Props) => {
         return () => { };
     }, [data]);
 
-    console.log(charData);
-
 
     return (
         <div className='card col-span-1'>
