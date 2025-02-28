@@ -1,4 +1,5 @@
-import { Expense } from './types';
+import moment from 'moment';
+import { Expense, Income } from './types';
 
 export const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,5 +36,15 @@ export const prepareExpenseBarChartData = (data: Expense[] | undefined) => {
         amount: item?.amount
     }));
 
+    return chartData;
+};
+
+export const prepareIncomeBarChartdata = (data: Income[] | undefined) => {
+    const sortedData: Income[] = [...(data ?? [])].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    const chartData = sortedData.map((item) => ({
+        month: moment(item?.date).format('Do MMM'),
+        amount: item?.amount,
+        source: item?.source
+    }));
     return chartData;
 };
