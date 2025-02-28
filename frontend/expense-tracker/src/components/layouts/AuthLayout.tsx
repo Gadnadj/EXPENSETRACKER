@@ -1,29 +1,42 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import CARD_2 from '../../assets/images/card2.png';
 import { LuTrendingUpDown } from 'react-icons/lu';
+import { ThemeContext } from '../../context/ThemeContext';
 
 type Props = {
     children: ReactNode
 }
 
 const AuthLayout = ({ children }: Props) => {
+    const { isDarkMode } = useContext(ThemeContext);
+
     return (
         <div className='flex'>
-            <div className="w-screen h-screen xl:w-[90vh] md:w-[60vh] px-12 pt-8 pb-12">
-                <h2 className="text-lg font-medium text-black">
+            <div className={`w-screen h-screen xl:w-[90vh] md:w-[60vh] px-12 pt-8 pb-12 transition-colors duration-300 ${
+                isDarkMode ? 'bg-gray-900' : 'bg-white'
+            }`}>
+                <h2 className={`text-lg font-medium transition-colors duration-300 ${
+                    isDarkMode ? 'text-white' : 'text-black'
+                }`}>
                     Expense Tracker
                 </h2>
                 {children}
             </div>
 
-            <div className="hidden md:block flex-1 h-screen bg-violet-50 bg-auth-bg-img bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative">
+            <div className={`hidden md:block flex-1 h-screen bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative transition-colors duration-300 ${
+                isDarkMode ? 'bg-gray-800' : 'bg-violet-50 bg-auth-bg-img'
+            }`}>
                 <div className="w-48 h-48 rounded-[40px] bg-purple-600 absolute -top-7 -left-5" />
                 <div className="w-48 h-56 rounded-[40px] border-[20px] border-fuchsia-600 absolute top-[30%] -right-10" />
                 <div className="w-48 h-48 rounded-[40px] bg-violet-500 absolute -bottom-7 -left-5" />
 
                 <div className="grid grid-cols-1 relative">
                     <div className="relative">
-                        <div className="absolute top-0 left-0 w-full h-full bg-white rounded-xl shadow-md shadow-purple-400/10 border border-gray-200/50"></div>
+                        <div className={`absolute top-0 left-0 w-full h-full rounded-xl shadow-md shadow-purple-400/10 border transition-colors duration-300 ${
+                            isDarkMode 
+                                ? 'bg-gray-700 border-gray-600' 
+                                : 'bg-white border-gray-200/50'
+                        }`}></div>
                         <StatsInfoCard
                             icon={<LuTrendingUpDown className="relative z-50" />}
                             label='Track Your Income & Expenses'
@@ -36,7 +49,6 @@ const AuthLayout = ({ children }: Props) => {
             </div>
         </div>
     );
-
 };
 
 export default AuthLayout;
@@ -49,6 +61,8 @@ interface StatsInfoCardProps {
 }
 
 const StatsInfoCard = ({ icon, label, value, color }: StatsInfoCardProps) => {
+    const { isDarkMode } = useContext(ThemeContext);
+
     return (
         <div className='flex gap-6 p-4 relative z-40'>
             <div className={`w-12 h-12 flex items-center justify-center text-[26px] text-white ${color} rounded-full relative z-50`}>
@@ -56,11 +70,15 @@ const StatsInfoCard = ({ icon, label, value, color }: StatsInfoCardProps) => {
             </div>
 
             <div className="relative z-40">
-                <h6 className='text-xs text-gray-500 mb-1'>
+                <h6 className={`text-xs mb-1 transition-colors duration-300 ${
+                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                }`}>
                     {label}
                 </h6>
 
-                <span className='text-[20px]'>${value}</span>
+                <span className={`text-[20px] transition-colors duration-300 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>${value}</span>
             </div>
         </div>
     );

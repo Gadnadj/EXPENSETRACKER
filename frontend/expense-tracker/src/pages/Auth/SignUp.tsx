@@ -2,12 +2,13 @@ import AuthLayout from '../../components/layouts/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import { useUser } from '../../hooks/useUser';
 import uploadImage from '../../utils/uploadImage';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const SignUp = () => {
 
@@ -18,6 +19,7 @@ const SignUp = () => {
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
     const { updateUser } = useUser();
+    const { isDarkMode } = useContext(ThemeContext);
 
     //handle Sign Up form submit
     const handleSignUp = async (e: React.FormEvent) => {
@@ -80,19 +82,21 @@ const SignUp = () => {
     };
     return (
         <AuthLayout>
-            <div className='lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center '>
-                <h3 className='text-xl font-semibold text-black'>
+            <div className='lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center'>
+                <h3 className={`text-xl font-semibold transition-colors duration-300 ${
+                    isDarkMode ? 'text-white' : 'text-black'
+                }`}>
                     Create an Account
                 </h3>
 
-                <p className='text-xs text-slate-700 mt-[5px] mb-6'>
+                <p className={`text-xs mt-[5px] mb-6 transition-colors duration-300 ${
+                    isDarkMode ? 'text-gray-400' : 'text-slate-700'
+                }`}>
                     Join us today by entering your details below.
                 </p>
 
                 <form onSubmit={handleSignUp}>
-
                     <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
-
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <Input
@@ -112,7 +116,6 @@ const SignUp = () => {
                         />
 
                         <div className='col-span-2'>
-
                             <Input
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -121,25 +124,26 @@ const SignUp = () => {
                                 type='password'
                             />
                         </div>
-
-
                     </div>
 
-                    {
-                        error && (
-                            <p className='text-red-500 text-xs pb-2.5'>{error}</p>
-                        )
-                    }
+                    {error && (
+                        <p className='text-red-500 text-xs pb-2.5'>{error}</p>
+                    )}
 
                     <button
                         onClick={handleSignUp}
-                        className='btn-primary'
+                        className={`btn-primary transition-colors duration-300 ${
+                            isDarkMode ? 'hover:bg-violet-500' : 'hover:bg-violet-600'
+                        }`}
                         type='submit'>
                         Create Account
                     </button>
 
-                    <p className='text-[13px] text-slate-800 mt-3'>Already have an account?{' '}
-                        <Link className='font-medium text-primary underline' to='/login'>
+                    <p className={`text-[13px] mt-3 transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-300' : 'text-slate-800'
+                    }`}>
+                        Already have an account?{' '}
+                        <Link className='font-medium text-primary underline hover:text-violet-500' to='/login'>
                             Sign In
                         </Link>
                     </p>

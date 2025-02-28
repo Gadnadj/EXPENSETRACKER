@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import AuthLayout from '../../components/layouts/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input';
@@ -6,15 +6,15 @@ import { validateEmail } from '../../utils/helper';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import { useUser } from '../../hooks/useUser';
-
+import { ThemeContext } from '../../context/ThemeContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const { isDarkMode } = useContext(ThemeContext);
 
     const navigate = useNavigate();
-
     const { updateUser } = useUser();
 
     //handle login form submit
@@ -64,11 +64,15 @@ const Login = () => {
     return (
         <AuthLayout>
             <div className='lg:w-[100%] h-3/4 md:h-full flex flex-col justify-center'>
-                <h3 className='text-xl font-semibold text-black'>
+                <h3 className={`text-xl font-semibold transition-colors duration-300 ${
+                    isDarkMode ? 'text-white' : 'text-black'
+                }`}>
                     Welcome Back
                 </h3>
 
-                <p className='text-xs text-slate-700 mt-[5px] mb-6'>
+                <p className={`text-xs mt-[5px] mb-6 transition-colors duration-300 ${
+                    isDarkMode ? 'text-gray-400' : 'text-slate-700'
+                }`}>
                     Please enter your details to log in
                 </p>
 
@@ -89,26 +93,27 @@ const Login = () => {
                         type='password'
                     />
 
-                    {
-                        error && (
-                            <p className='text-red-500 text-xs pb-2.5'>{error}</p>
-                        )
-                    }
+                    {error && (
+                        <p className='text-red-500 text-xs pb-2.5'>{error}</p>
+                    )}
 
                     <button
                         onClick={handleLogin}
-                        className='btn-primary'
+                        className={`btn-primary transition-colors duration-300 ${
+                            isDarkMode ? 'hover:bg-violet-500' : 'hover:bg-violet-600'
+                        }`}
                         type='submit'>
                         LOGIN
                     </button>
 
-                    <p className='text-[13px] text-slate-800 mt-3'>Don't have an account?{' '}
-                        <Link className='font-medium text-primary underline' to='/signUp'>
+                    <p className={`text-[13px] mt-3 transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-300' : 'text-slate-800'
+                    }`}>
+                        Don't have an account?{' '}
+                        <Link className='font-medium text-primary underline hover:text-violet-500' to='/signUp'>
                             Sign Up
                         </Link>
                     </p>
-
-
                 </form>
             </div>
         </AuthLayout>
