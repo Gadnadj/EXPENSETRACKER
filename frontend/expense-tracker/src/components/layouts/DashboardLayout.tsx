@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 import { useUser } from '../../hooks/useUser';
 import Navbar from './Navbar';
 import SideMenu from './SideMenu';
+import { ThemeContext } from '../../context/ThemeContext';
 
 type Props = {
     children: ReactNode;
@@ -10,23 +11,24 @@ type Props = {
 
 const DashboardLayout = ({ children, activeMenu }: Props) => {
     const { user } = useUser();
+    const { isDarkMode } = useContext(ThemeContext);
 
     return (
-        <div className='min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200'>
+        <div className={`min-h-screen transition-colors duration-300 ${
+            isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+        }`}>
             <Navbar activeMenu={activeMenu} />
-            {
-                user && (
-                    <div className='flex'>
-                        <div className='max-[1080px]:hidden'>
-                            <SideMenu activeMenu={activeMenu} />
-                        </div>
-
-                        <div className='grow mx-5'>
-                            {children}
-                        </div>
+            {user && (
+                <div className='flex'>
+                    <div className='max-[1080px]:hidden'>
+                        <SideMenu activeMenu={activeMenu} />
                     </div>
-                )
-            }
+
+                    <div className='grow mx-5'>
+                        {children}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

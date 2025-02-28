@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import DashboardLayout from '../../components/layouts/DashboardLayout';
 import IncomeOverview from '../../components/Income/IncomeOverview';
 import type { Income } from '../../utils/types';
@@ -10,8 +10,11 @@ import toast from 'react-hot-toast';
 import IncomeList from '../../components/Income/IncomeList';
 import DeleteAlert from '../../components/DeleteAlert';
 import Loading from '../../components/Loading';
+import { ThemeContext } from '../../context/ThemeContext';
+import gsap from 'gsap';
 
 const Income = () => {
+    const { isDarkMode } = useContext(ThemeContext);
     const [incomeData, setIncomeData] = useState<Income[]>([]);
     const [loading, setLoading] = useState(true);
     const [openDeleteAlert, setOpenDeleteAlert] = useState<{ show: boolean, data: string | null }>({
@@ -19,6 +22,10 @@ const Income = () => {
         data: null
     });
     const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
+
+    // Refs pour les animations
+    const overviewRef = useRef<HTMLDivElement>(null);
+    const listRef = useRef<HTMLDivElement>(null);
 
     const handleAddIncome = async (income: Income) => {
         const { source, amount, date, icon } = income;
@@ -103,26 +110,69 @@ const Income = () => {
         fetchIncomeDetails();
     }, []);
 
+    // Animations GSAP
+    useEffect(() => {
+        if (!loading) {
+            // Animation de l'aperçu
+            gsap.fromTo(
+                overviewRef.current,
+                {
+                    y: -50,
+                    opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'power2.out'
+                }
+            );
+
+            // Animation de la liste
+            gsap.fromTo(
+                listRef.current,
+                {
+                    y: 50,
+                    opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'back.out(1.7)',
+                    delay: 0.3
+                }
+            );
+        }
+    }, [loading]);
+
     if (loading) {
-        return <Loading />;
+        return (
+            <div className={`flex items-center justify-center h-screen transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+                }`}>
+                <Loading />
+            </div>
+        );
     }
 
     return (
         <DashboardLayout activeMenu='Income'>
             <div className="my-5 mx-auto">
                 <div className='grid grid-cols-1 gap-6'>
-                    <div className=''>
+                    <div ref={overviewRef}>
                         <IncomeOverview
                             transactions={incomeData}
                             onAddIncome={() => setOpenAddIncomeModal(true)}
                         />
                     </div>
 
-                    <IncomeList
-                        transactions={incomeData}
-                        onDelete={(id: string) => { setOpenDeleteAlert({ show: true, data: id }); }}
-                        onDownload={handleDownloadIncome}
-                    />
+                    <div ref={listRef}>
+                        <IncomeList
+                            transactions={incomeData}
+                            onDelete={(id: string) => { setOpenDeleteAlert({ show: true, data: id }); }}
+                            onDownload={handleDownloadIncome}
+                        />
+                    </div>
                 </div>
 
                 <Modal

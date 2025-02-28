@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import DashboardLayout from '../../components/layouts/DashboardLayout';
 import type { Expense } from '../../utils/types';
 import axiosInstance from '../../utils/axiosInstance';
@@ -9,24 +9,25 @@ import Modal from '../../components/layouts/Modal';
 import AddExpenseForm from '../../components/Expense/AddExpenseForm';
 import ExpenseList from '../../components/Expense/ExpenseList';
 import DeleteAlert from '../../components/DeleteAlert';
-
+import Loading from '../../components/Loading';
+import { ThemeContext } from '../../context/ThemeContext';
+import gsap from 'gsap';
 
 const Expense = () => {
-
+    const { isDarkMode } = useContext(ThemeContext);
     const [expenseData, setExpenseData] = useState<Expense[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [openDeleteAlert, setOpenDeleteAlert] = useState<{ show: boolean, data: string | null }>({
         show: false,
         data: null
     });
-    0;
     const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
 
+    // Refs pour les animations
+    const overviewRef = useRef<HTMLDivElement>(null);
+    const listRef = useRef<HTMLDivElement>(null);
+
     const fetchExpenseDetails = async () => {
-        if (loading) return;
-
-        setLoading(true);
-
         try {
             const response = await axiosInstance.get(`${API_PATHS.EXPENSE.GET_ALL_EXPENSE}`);
             if (response.data) {
@@ -34,6 +35,7 @@ const Expense = () => {
             }
         } catch (error) {
             console.log('Something went wrong. Please try again.', error);
+            toast.error('Failed to fetch expense details');
         } finally {
             setLoading(false);
         }
@@ -110,25 +112,72 @@ const Expense = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Animations GSAP
+    useEffect(() => {
+        if (!loading) {
+            // Animation de l'aperçu
+            gsap.fromTo(
+                overviewRef.current,
+                { 
+                    y: -50,
+                    opacity: 0 
+                },
+                { 
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'power2.out'
+                }
+            );
+
+            // Animation de la liste
+            gsap.fromTo(
+                listRef.current,
+                { 
+                    y: 50,
+                    opacity: 0 
+                },
+                { 
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'back.out(1.7)',
+                    delay: 0.3
+                }
+            );
+        }
+    }, [loading]);
+
+    if (loading) {
+        return (
+            <div className={`flex items-center justify-center h-screen transition-colors duration-300 ${
+                isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+            }`}>
+                <Loading />
+            </div>
+        );
+    }
+
     return (
         <DashboardLayout activeMenu='Expense'>
             <div className="my-5 mx-auto">
                 <div className='grid grid-cols-1 gap-6'>
-                    <div>
+                    <div ref={overviewRef}>
                         <ExpenseOverview
                             transactions={expenseData}
                             onExpenseIncome={() => setOpenAddExpenseModal(true)}
                         />
                     </div>
 
-                    <ExpenseList
-                        transactions={expenseData}
-                        onDelete={(id: string) => {
-                            setOpenDeleteAlert({ show: true, data: id });
-                        }}
-                        onDownload={handleDownloadExpense}
-                    />
-
+                    <div ref={listRef}>
+                        <ExpenseList
+                            transactions={expenseData}
+                            onDelete={(id: string) => {
+                                setOpenDeleteAlert({ show: true, data: id });
+                            }}
+                            onDownload={handleDownloadExpense}
+                        />
+                    </div>
                 </div>
 
                 <Modal
@@ -149,7 +198,6 @@ const Expense = () => {
                         onDelete={() => deleteExpense(openDeleteAlert.data ?? '')}
                     />
                 </Modal>
-
             </div>
         </DashboardLayout>
     );
