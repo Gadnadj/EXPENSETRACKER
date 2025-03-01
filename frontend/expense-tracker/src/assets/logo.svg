@@ -1,29 +1,27 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Fond avec dégradé -->
-    <circle cx="256" cy="256" r="256" fill="url(#gradient)"/>
-    
-    <!-- Effet de brillance -->
-    <circle cx="180" cy="180" r="160" fill="white" fill-opacity="0.1"/>
-    
-    <!-- Container pour les initiales -->
-    <g filter="url(#shadow)">
-        <!-- E -->
-        <path d="M160 160h160v40H200v60h100v40H200v60h120v40H160V160z" fill="white"/>
-        <!-- T -->
-        <path d="M320 160h120v40H400v240h-40V200h-40v-40z" fill="white"/>
-    </g>
-    
-    <!-- Définitions des effets -->
-    <defs>
-        <!-- Dégradé de fond -->
-        <linearGradient id="gradient" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#6D28D9"/>
-            <stop offset="100%" stop-color="#4C1D95"/>
-        </linearGradient>
-        
-        <!-- Ombre portée -->
-        <filter id="shadow" x="-4" y="-4" width="520" height="520" filterUnits="userSpaceOnUse">
-            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.25"/>
-        </filter>
-    </defs>
-</svg> 
+<?xml version="1.0" encoding="utf-8"?>
+<!-- License: PD. Made by spothq: https://github.com/spothq/cryptocurrency-icons -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<circle cx="16" cy="16" r="16" fill="#7e22ce"/>
+
+<g fill="#FFF" fill-rule="nonzero">
+
+<path fill-opacity=".602" d="M16.498 4v8.87l7.497 3.35z"/>
+
+<path d="M16.498 4L9 16.22l7.498-3.35z"/>
+
+<path fill-opacity=".602" d="M16.498 21.968v6.027L24 17.616z"/>
+
+<path d="M16.498 27.995v-6.028L9 17.616z"/>
+
+<path fill-opacity=".2" d="M16.498 20.573l7.497-4.353-7.497-3.348z"/>
+
+<path fill-opacity=".602" d="M9 16.22l7.498 4.353v-7.701z"/>
+
+</g>
+
+</g>
+
+</svg>
