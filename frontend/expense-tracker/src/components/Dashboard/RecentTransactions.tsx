@@ -1,16 +1,14 @@
 import { useContext } from 'react';
 import { Expense, Income } from '../../utils/types';
-import { LuArrowRight } from 'react-icons/lu';
 import moment from 'moment';
 import TransactionInfoCard from '../Cards/TransactionInfoCard';
 import { ThemeContext } from '../../context/ThemeContext';
 
 type Props = {
     transactions: (Expense | Income)[] | undefined;
-    onSeeMore: () => void;
 }
 
-const RecentTransactions = ({ transactions, onSeeMore }: Props) => {
+const RecentTransactions = ({ transactions }: Props) => {
     const { isDarkMode } = useContext(ThemeContext);
 
     return (

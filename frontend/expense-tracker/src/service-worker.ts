@@ -1,8 +1,10 @@
 /// <reference lib="webworker" />
 
+declare const self: ServiceWorkerGlobalScope;
+
 const CACHE_NAME = 'expense-tracker-v1';
 
-// Ajoutez ici les ressources à mettre en cache
+// Ressources à mettre en cache
 const urlsToCache = [
   '/',
   '/index.html',
@@ -12,16 +14,18 @@ const urlsToCache = [
   '/favicon.ico'
 ];
 
+// Installation du service worker
 self.addEventListener('install', (event: ExtendableEvent) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache');
+        console.log('Cache ouvert');
         return cache.addAll(urlsToCache);
       })
   );
 });
 
+// Interception des requêtes
 self.addEventListener('fetch', (event: FetchEvent) => {
   event.respondWith(
     caches.match(event.request)
@@ -31,17 +35,17 @@ self.addEventListener('fetch', (event: FetchEvent) => {
           return response;
         }
 
-        // Clone the request because it's a stream and can only be consumed once
+        // Clone la requête car elle ne peut être utilisée qu'une fois
         const fetchRequest = event.request.clone();
 
         return fetch(fetchRequest).then(
           response => {
-            // Check if we received a valid response
+            // Vérifie si la réponse est valide
             if (!response || response.status !== 200 || response.type !== 'basic') {
               return response;
             }
 
-            // Clone the response because it's a stream and can only be consumed once
+            // Clone la réponse car elle ne peut être utilisée qu'une fois
             const responseToCache = response.clone();
 
             caches.open(CACHE_NAME)
@@ -56,6 +60,7 @@ self.addEventListener('fetch', (event: FetchEvent) => {
   );
 });
 
+// Activation et nettoyage des anciens caches
 self.addEventListener('activate', (event: ExtendableEvent) => {
   const cacheWhitelist = [CACHE_NAME];
 
@@ -63,7 +68,7 @@ self.addEventListener('activate', (event: ExtendableEvent) => {
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
+          if (!cacheWhitelist.includes(cacheName)) {
             return caches.delete(cacheName);
           }
         })

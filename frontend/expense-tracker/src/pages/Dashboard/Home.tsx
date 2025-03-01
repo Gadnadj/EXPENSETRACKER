@@ -173,7 +173,6 @@ const Home = () => {
                 <div ref={recentTransactionsRef} className='mt-6'>
                     <RecentTransactions
                         transactions={dashboardData?.recentTransactions || []}
-                        onSeeMore={() => navigate('/transactions')}
                     />
                 </div>
             </div>
