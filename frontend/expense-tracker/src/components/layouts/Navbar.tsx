@@ -22,7 +22,7 @@ const Navbar = ({ activeMenu }: Props) => {
         }`} style={{ WebkitTransform: 'translate3d(0,0,0)' }}>
             <div className="flex items-center gap-5">
                 <button
-                    className={`block lg:hidden transition-colors duration-300 ${isPWA ? '' : 'mt-[30px]'}  ${
+                    className={`block lg:hidden transition-colors duration-300 ${isPWA ? 'mt-[30px]' : ''}  ${
                         isDarkMode ? 'text-gray-200' : 'text-gray-700'
                     }`}
                     onClick={() => setOpenSideMenu(!openSideMenu)}>
@@ -35,7 +35,7 @@ const Navbar = ({ activeMenu }: Props) => {
                     }
                 </button>
 
-                <h2 className={`text-xl md:text-lg font-medium transition-colors duration-300 ${isPWA ? '' : 'mt-[30px]'}  ${
+                <h2 className={`text-xl md:text-lg font-medium transition-colors duration-300 ${isPWA ? 'mt-[30px]' : ''}  ${
                     isDarkMode ? 'text-white' : 'text-gray-900'
                 }`}>
                     Expense Tracker
@@ -44,7 +44,7 @@ const Navbar = ({ activeMenu }: Props) => {
 
             <button
                 onClick={toggleTheme}
-                className={`relative p-2 rounded-lg transform active:scale-95 transition-all duration-300 ${isPWA ? '' : 'mt-[30px]'}  ${
+                className={`relative p-2 rounded-lg transform active:scale-95 transition-all duration-300 ${isPWA ? 'mt-[30px]' : ''}  ${
                     isDarkMode 
                         ? 'hover:bg-gray-700' 
                         : 'hover:bg-gray-100'
