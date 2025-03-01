@@ -13,7 +13,7 @@ const Navbar = ({ activeMenu }: Props) => {
     const [openSideMenu, setOpenSideMenu] = useState(false);
 
     return (
-        <div className={`flex items-center justify-between backdrop-blur-[2px] py-4 px-7 sticky top-0 z-30 transition-all duration-300 border-b ${
+        <div className={`flex items-center justify-between backdrop-blur-[2px] py-4 px-7 fixed w-full top-0 z-30 transition-all duration-300 border-b ${
             isDarkMode 
                 ? 'bg-gray-800 border-gray-700' 
                 : 'bg-white border-gray-200/50'

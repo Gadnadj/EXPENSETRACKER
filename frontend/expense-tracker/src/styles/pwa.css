@@ -14,9 +14,16 @@
   padding-top: max(var(--sat), 0px);
 }
 
+/* Fix for iOS PWA navbar */
 @supports (-webkit-touch-callout: none) {
   .fixed {
-    position: -webkit-sticky;
-    position: sticky;
+    position: fixed;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  body {
+    -webkit-overflow-scrolling: touch;
   }
 } 
