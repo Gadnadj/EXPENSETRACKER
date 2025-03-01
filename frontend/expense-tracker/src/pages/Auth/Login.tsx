@@ -9,6 +9,7 @@ import { useUser } from '../../hooks/useUser';
 import { ThemeContext } from '../../context/ThemeContext';
 
 const Login = () => {
+    const isPWA = window.matchMedia('(display-mode: standalone)').matches || (navigator as Navigator & { standalone?: boolean }).standalone;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -63,8 +64,8 @@ const Login = () => {
 
     return (
         <AuthLayout>
-            <div className='lg:w-[100%] h-3/4 md:h-full flex flex-col justify-center'>
-                <h3 className={`text-xl font-semibold transition-colors duration-300 ${
+            <div className={`lg:w-[100%] h-3/4 md:h-full flex flex-col justify-center ${isPWA ? 'mb-[80px]' : ''}`}>
+                <h3 className={`text-xl font-semibold transition-colors duration-300  ${
                     isDarkMode ? 'text-white' : 'text-black'
                 }`}>
                     Welcome Back

@@ -13,8 +13,8 @@ const AuthLayout = ({ children }: Props) => {
     const isPWA = window.matchMedia('(display-mode: standalone)').matches || (navigator as Navigator & { standalone?: boolean }).standalone;
 
     return (
-        <div className='flex min-h-screen overflow-y-hidden'>
-            <div className={`w-full md:w-[60vh] xl:w-[90vh] px-4 sm:px-8 md:px-12 py-6 md:py-8 transition-colors duration-300 ${
+        <div className='flex min-h-screen overflow-y-hidden '>
+            <div className={`w-full md:w-[60vh] xl:w-[90vh] px-4 sm:px-8 md:px-12 py-6 md:py-8 transition-colors duration-300  ${
                 isDarkMode ? 'bg-gray-900' : 'bg-white'
             }`}>
                 <div className={`flex items-center justify-between mb-4 md:mb-8 ${isPWA ? 'mt-[20px]' : ''}`}>
@@ -30,7 +30,7 @@ const AuthLayout = ({ children }: Props) => {
                 </div>
             </div>
 
-            <div className={`hidden md:block flex-1 h-screen bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative transition-colors duration-300 ${
+            <div className={`hidden md:block flex-1 h-screen bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative transition-colors duration-300  ${
                 isDarkMode ? 'bg-gray-800' : 'bg-violet-50 bg-auth-bg-img'
             }`}>
                 <div className="w-48 h-48 rounded-[40px] bg-purple-600 absolute -top-7 -left-5" />
@@ -39,7 +39,7 @@ const AuthLayout = ({ children }: Props) => {
 
                 <div className="grid grid-cols-1 relative">
                     <div className="relative">
-                        <div className={`absolute top-0 left-0 w-full h-full rounded-xl shadow-md shadow-purple-400/10 border transition-colors duration-300 ${
+                        <div className={`absolute top-0 left-0 w-full h-full rounded-xl shadow-md shadow-purple-400/10 border transition-colors duration-300  ${
                             isDarkMode 
                                 ? 'bg-gray-700 border-gray-600' 
                                 : 'bg-white border-gray-200/50'
