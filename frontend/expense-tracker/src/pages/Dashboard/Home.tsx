@@ -17,8 +17,10 @@ import RecentIncome from '../../components/Dashboard/RecentIncome';
 import Loading from '../../components/Loading';
 import toast from 'react-hot-toast';
 import gsap from 'gsap';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 const Home = () => {
+    useScrollToTop();
     useUserAuth();
     const navigate = useNavigate();
     const [dashboardData, setDashboardData] = useState<DashboardTypes | null>(null);
@@ -55,11 +57,11 @@ const Home = () => {
             // Animation des cartes d'information
             gsap.fromTo(
                 infoCardsRef.current?.children || [],
-                { 
+                {
                     y: -50,
-                    opacity: 0 
+                    opacity: 0
                 },
-                { 
+                {
                     y: 0,
                     opacity: 1,
                     duration: 0.5,
@@ -71,11 +73,11 @@ const Home = () => {
             // Animation des graphiques
             gsap.fromTo(
                 chartsRef.current?.children || [],
-                { 
+                {
                     scale: 0.8,
-                    opacity: 0 
+                    opacity: 0
                 },
-                { 
+                {
                     scale: 1,
                     opacity: 1,
                     duration: 0.6,
@@ -88,11 +90,11 @@ const Home = () => {
             // Animation des transactions
             gsap.fromTo(
                 transactionsRef.current?.children || [],
-                { 
+                {
                     x: -50,
-                    opacity: 0 
+                    opacity: 0
                 },
-                { 
+                {
                     x: 0,
                     opacity: 1,
                     duration: 0.5,
@@ -105,11 +107,11 @@ const Home = () => {
             // Animation des transactions récentes
             gsap.fromTo(
                 recentTransactionsRef.current,
-                { 
+                {
                     y: 50,
-                    opacity: 0 
+                    opacity: 0
                 },
-                { 
+                {
                     y: 0,
                     opacity: 1,
                     duration: 0.5,
