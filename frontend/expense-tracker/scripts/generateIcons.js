@@ -62,7 +62,7 @@ async function generateIcons() {
             ctx.textAlign = 'center';
 
             // Texte centré "ET"
-            ctx.fillText('E', size / 2, size / 2);
+            ctx.fillText('F', size / 2, size / 2);
 
             // Convertir le canvas en buffer
             const buffer = canvas.toBuffer('image/png');
