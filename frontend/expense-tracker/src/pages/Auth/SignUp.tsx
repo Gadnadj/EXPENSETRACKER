@@ -82,23 +82,25 @@ const SignUp = () => {
     };
     return (
         <AuthLayout>
-            <div className='lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center'>
-                <h3 className={`text-xl font-semibold transition-colors duration-300 ${
+            <div className='w-full px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center py-8 sm:py-12'>
+                <h3 className={`text-xl sm:text-2xl font-semibold mb-2 transition-colors duration-300 ${
                     isDarkMode ? 'text-white' : 'text-black'
                 }`}>
                     Create an Account
                 </h3>
 
-                <p className={`text-xs mt-[5px] mb-6 transition-colors duration-300 ${
+                <p className={`text-sm mb-8 transition-colors duration-300 ${
                     isDarkMode ? 'text-gray-400' : 'text-slate-700'
                 }`}>
                     Join us today by entering your details below.
                 </p>
 
-                <form onSubmit={handleSignUp}>
-                    <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+                <form onSubmit={handleSignUp} className="space-y-6">
+                    <div className="flex justify-center mb-6">
+                        <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+                    </div>
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                    <div className='space-y-4'>
                         <Input
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
@@ -110,40 +112,38 @@ const SignUp = () => {
                         <Input
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            label='Email Adress'
+                            label='Email Address'
                             placeholder='john@example.com'
                             type='text'
                         />
 
-                        <div className='col-span-2'>
-                            <Input
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                label='Password'
-                                placeholder='********'
-                                type='password'
-                            />
-                        </div>
+                        <Input
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            label='Password'
+                            placeholder='********'
+                            type='password'
+                        />
                     </div>
 
                     {error && (
-                        <p className='text-red-500 text-xs pb-2.5'>{error}</p>
+                        <p className='text-red-500 text-sm mt-2'>{error}</p>
                     )}
 
                     <button
                         onClick={handleSignUp}
-                        className={`btn-primary transition-colors duration-300 ${
-                            isDarkMode ? 'hover:bg-violet-500' : 'hover:bg-violet-600'
+                        className={`w-full py-3 rounded-lg bg-violet-600 text-white font-medium mt-6 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ${
+                            isDarkMode ? 'hover:bg-violet-500' : 'hover:bg-violet-700'
                         }`}
                         type='submit'>
                         Create Account
                     </button>
 
-                    <p className={`text-[13px] mt-3 transition-colors duration-300 ${
+                    <p className={`text-sm text-center transition-colors duration-300 ${
                         isDarkMode ? 'text-gray-300' : 'text-slate-800'
                     }`}>
                         Already have an account?{' '}
-                        <Link className='font-medium text-primary underline hover:text-violet-500' to='/login'>
+                        <Link className='font-medium text-primary hover:text-violet-500 transition-colors duration-300' to='/login'>
                             Sign In
                         </Link>
                     </p>

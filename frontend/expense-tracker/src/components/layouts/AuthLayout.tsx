@@ -12,19 +12,21 @@ const AuthLayout = ({ children }: Props) => {
     const { isDarkMode } = useContext(ThemeContext);
 
     return (
-        <div className='flex'>
-            <div className={`w-screen h-screen xl:w-[90vh] md:w-[60vh] px-12 pt-8 pb-12 transition-colors duration-300 ${
+        <div className='flex min-h-screen overflow-y-hidden'>
+            <div className={`w-full md:w-[60vh] xl:w-[90vh] px-4 sm:px-8 md:px-12 py-6 md:py-8 transition-colors duration-300 ${
                 isDarkMode ? 'bg-gray-900' : 'bg-white'
             }`}>
-                <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center justify-between mb-4 md:mb-8">
                     <h2 className={`text-lg font-medium transition-colors duration-300 ${
                         isDarkMode ? 'text-white' : 'text-black'
                     }`}>
-                        Expense Tracker
+                        Expense Tracker <span className="hidden sm:inline">🚀</span>
                     </h2>
                     <ThemeToggle />
                 </div>
-                {children}
+                <div className="h-full flex flex-col justify-center">
+                    {children}
+                </div>
             </div>
 
             <div className={`hidden md:block flex-1 h-screen bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative transition-colors duration-300 ${
