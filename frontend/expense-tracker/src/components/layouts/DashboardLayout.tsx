@@ -14,12 +14,14 @@ const DashboardLayout = ({ children, activeMenu }: Props) => {
     const { isDarkMode } = useContext(ThemeContext);
 
     return (
-        <div className={`min-h-screen transition-colors duration-300 ${
+        <div className={`min-h-screen flex flex-col transition-colors duration-300 ${
             isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
         }`}>
-            <Navbar activeMenu={activeMenu} />
+            <div className="fixed top-0 left-0 right-0 z-50">
+                <Navbar activeMenu={activeMenu} />
+            </div>
             {user && (
-                <div className='flex'>
+                <div className='flex mt-[73px]'>
                     <div className='max-[1080px]:hidden'>
                         <SideMenu activeMenu={activeMenu} />
                     </div>
