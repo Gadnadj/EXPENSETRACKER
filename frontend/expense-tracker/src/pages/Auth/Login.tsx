@@ -13,6 +13,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const { isDarkMode } = useContext(ThemeContext);
 
     const navigate = useNavigate();
@@ -38,6 +39,7 @@ const Login = () => {
         }
 
         setError('');
+        setIsLoading(true);
 
         //Login API call
         try {
@@ -59,6 +61,7 @@ const Login = () => {
             else {
                 setError('Something went wrong. Please try again');
             }
+            setIsLoading(false);
         }
     };
 
@@ -100,11 +103,18 @@ const Login = () => {
 
                     <button
                         onClick={handleLogin}
-                        className={`btn-primary transition-colors duration-300 ${
+                        className={`btn-primary transition-all duration-300 relative ${
                             isDarkMode ? 'hover:bg-violet-500' : 'hover:bg-violet-600'
-                        }`}
-                        type='submit'>
-                        LOGIN
+                        } ${isLoading ? 'opacity-90 cursor-not-allowed' : ''}`}
+                        type='submit'
+                        disabled={isLoading}
+                    >
+                        <span className={`${isLoading ? 'invisible' : ''}`}>LOGIN</span>
+                        {isLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            </div>
+                        )}
                     </button>
 
                     <p className={`text-[13px] mt-3 transition-colors duration-300 ${

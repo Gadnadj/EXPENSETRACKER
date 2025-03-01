@@ -17,6 +17,7 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const { updateUser } = useUser();
     const { isDarkMode } = useContext(ThemeContext);
@@ -48,6 +49,7 @@ const SignUp = () => {
         }
 
         setError('');
+        setIsLoading(true);
 
         //Sign Up API call
         try {
@@ -78,6 +80,7 @@ const SignUp = () => {
             else {
                 setError('Something went wrong. Please try again');
             }
+            setIsLoading(false);
         }
     };
     return (
@@ -132,11 +135,18 @@ const SignUp = () => {
 
                     <button
                         onClick={handleSignUp}
-                        className={`w-full py-3 rounded-lg bg-violet-600 text-white font-medium mt-6 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ${
+                        className={`w-full py-3 rounded-lg bg-violet-600 text-white font-medium mt-6 relative transition-all duration-300 ${
                             isDarkMode ? 'hover:bg-violet-500' : 'hover:bg-violet-700'
-                        }`}
-                        type='submit'>
-                        Create Account
+                        } ${isLoading ? 'opacity-90 cursor-not-allowed' : 'hover:scale-[1.02] active:scale-[0.98]'}`}
+                        type='submit'
+                        disabled={isLoading}
+                    >
+                        <span className={`${isLoading ? 'invisible' : ''}`}>Create Account</span>
+                        {isLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            </div>
+                        )}
                     </button>
 
                     <p className={`text-sm text-center transition-colors duration-300 ${
