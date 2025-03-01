@@ -1,8 +1,6 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import CustomTooltip from './CustomTooltip';
-import CustomLegend from './CustomLegend';
 
 type Props = {
     data: Array<{ name: string; amount: number }>;

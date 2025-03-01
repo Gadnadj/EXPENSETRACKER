@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 import SideMenu from './SideMenu';
 import { LuSun, LuMoon } from 'react-icons/lu';

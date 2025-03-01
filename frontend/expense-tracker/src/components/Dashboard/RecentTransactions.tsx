@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Expense, Income } from '../../utils/types';
 import { LuArrowRight } from 'react-icons/lu';
 import moment from 'moment';

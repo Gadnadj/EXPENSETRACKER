@@ -12,6 +12,7 @@ interface UserContextType {
     clearUser: () => void;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const UserProvider = ({ children }: childrenType) => {

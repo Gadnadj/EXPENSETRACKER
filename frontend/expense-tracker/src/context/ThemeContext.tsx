@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useState, useEffect } from 'react';
+import { createContext, ReactNode, useState, useEffect } from 'react';
 
 interface ThemeContextType {
     isDarkMode: boolean;
@@ -9,6 +9,7 @@ interface Props {
     children: ReactNode;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext<ThemeContextType>({
     isDarkMode: false,
     toggleTheme: () => { }
