@@ -93,9 +93,7 @@ const CustomLineChart = ({ data }: Props) => {
 
                     <Tooltip 
                         content={<CustomTooltip />} 
-                        cursor={{ 
-                            stroke: isDarkMode ? '#4B5563' : '#E5E7EB' 
-                        }} 
+                        cursor={{stroke: isDarkMode ? '#4B5563' : '#E5E7Eb'}}
                     />
 
                     <Area 

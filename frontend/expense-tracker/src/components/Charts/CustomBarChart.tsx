@@ -10,23 +10,24 @@ const CustomBarChart = ({ data }: Props) => {
     const { isDarkMode } = useContext(ThemeContext);
 
     const getBarColor = (index: number) => {
+        if (isDarkMode) {
+            return index % 2 === 0 ? '#7c3aed' : '#9333ea';
+        }
         return index % 2 === 0 ? '#875cf5' : '#cfbefb';
     };
-
-    const axisColor = isDarkMode ? '#9ca3af' : '#555';
 
     const CustomTooltip = ({ active, payload }: { active?: boolean, payload?: any[] }) => {
         if (active && payload && payload.length) {
             return (
-                <div className={`shadow-md rounded-lg p-2 border transition-colors duration-300 ${
+                <div className={`p-3 rounded-lg shadow-lg border backdrop-blur-sm transition-all duration-300 ${
                     isDarkMode 
-                        ? 'bg-gray-800 border-gray-700' 
-                        : 'bg-white border-gray-300'
+                        ? 'bg-gray-800/90 border-gray-700 shadow-gray-900/20' 
+                        : 'bg-white/90 border-gray-200 shadow-gray-200/20'
                 }`}>
                     <p className={`text-xs font-semibold mb-1 transition-colors duration-300 ${
-                        isDarkMode ? 'text-purple-400' : 'text-purple-800'
+                        isDarkMode ? 'text-violet-400' : 'text-violet-600'
                     }`}>
-                        {payload[0].payload.category}
+                        {payload[0].payload.category || payload[0].payload.source}
                     </p>
                     <p className={`text-sm transition-colors duration-300 ${
                         isDarkMode ? 'text-gray-400' : 'text-gray-600'
@@ -42,25 +43,50 @@ const CustomBarChart = ({ data }: Props) => {
     };
 
     return (
-        <div className={`transition-colors duration-300 ${
+        <div className={`w-full h-full p-4 rounded-xl transition-colors duration-300 ${
             isDarkMode ? 'bg-gray-800' : 'bg-white'
         }`}>
             <ResponsiveContainer width='100%' height={300}>
-                <BarChart data={data}>
-                    <CartesianGrid stroke='none' />
+                <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                    <CartesianGrid 
+                        strokeDasharray="3 3" 
+                        stroke={isDarkMode ? '#374151' : '#E5E7EB'} 
+                        vertical={false} 
+                    />
                     <XAxis 
                         dataKey='category' 
-                        tick={{ fontSize: 12, fill: axisColor }} 
-                        stroke='none'
+                        tick={{ 
+                            fontSize: 12, 
+                            fill: isDarkMode ? '#9CA3AF' : '#6B7280'
+                        }}
+                        stroke={isDarkMode ? '#374151' : '#E5E7EB'}
+                        tickLine={false}
+                        axisLine={false}
+                        dy={10}
                     />
                     <YAxis 
-                        tick={{ fontSize: 12, fill: axisColor }} 
-                        stroke='none'
+                        tick={{ 
+                            fontSize: 12, 
+                            fill: isDarkMode ? '#9CA3AF' : '#6B7280'
+                        }}
+                        stroke={isDarkMode ? '#374151' : '#E5E7EB'}
+                        tickLine={false}
+                        axisLine={false}
+                        dx={-10}
                     />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey='amount'>
+                    <Tooltip 
+                        content={<CustomTooltip />}
+                        cursor={false}
+                    />
+                    <Bar 
+                        dataKey='amount'
+                        radius={[4, 4, 0, 0]}
+                    >
                         {data.map((_, index) => (
-                            <Cell key={index} fill={getBarColor(index)} />
+                            <Cell 
+                                key={index} 
+                                fill={getBarColor(index)}
+                            />
                         ))}
                     </Bar>
                 </BarChart>

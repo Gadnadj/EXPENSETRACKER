@@ -16,13 +16,13 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }: Pr
     const CustomTooltip = ({ active, payload }: { active?: boolean, payload?: any[] }) => {
         if (active && payload && payload.length) {
             return (
-                <div className={`shadow-md rounded-lg p-2 border transition-colors duration-300 ${
+                <div className={`p-3 rounded-lg shadow-lg border backdrop-blur-sm transition-all duration-300 z-50 ${
                     isDarkMode 
-                        ? 'bg-gray-800 border-gray-700' 
-                        : 'bg-white border-gray-300'
+                        ? 'bg-gray-800/90 border-gray-700 shadow-gray-900/20' 
+                        : 'bg-white/90 border-gray-200 shadow-gray-200/20'
                 }`}>
                     <p className={`text-xs font-semibold mb-1 transition-colors duration-300 ${
-                        isDarkMode ? 'text-purple-400' : 'text-purple-800'
+                        isDarkMode ? 'text-violet-400' : 'text-violet-600'
                     }`}>
                         {payload[0].payload.name}
                     </p>
@@ -83,13 +83,17 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }: Pr
                             />
                         ))}
                     </Pie>
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip 
+                        content={<CustomTooltip />}
+                        wrapperStyle={{ zIndex: 100 }}
+                        cursor={{ fill: 'none' }}
+                    />
                     <Legend content={<CustomLegend />} />
                 </PieChart>
             </ResponsiveContainer>
 
             {showTextAnchor && (
-                <div className='absolute flex flex-col items-center justify-center top-[175px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10'>
+                <div className='absolute flex flex-col items-center justify-center top-[175px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none'>
                     <p className={`text-sm mb-1 transition-colors duration-300 ${
                         isDarkMode ? 'text-gray-400' : 'text-gray-600'
                     }`}>
