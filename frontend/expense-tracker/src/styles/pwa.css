@@ -17,13 +17,29 @@
 /* Fix for iOS PWA navbar */
 @supports (-webkit-touch-callout: none) {
   .fixed {
-    position: fixed;
+    position: fixed !important;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    width: 100%;
   }
   
   body {
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  #root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 } 
