@@ -143,7 +143,7 @@ const SignUp = () => {
                         isDarkMode ? 'text-gray-300' : 'text-slate-800'
                     }`}>
                         Already have an account?{' '}
-                        <Link className='font-medium text-primary hover:text-violet-500 transition-colors duration-300' to='/login'>
+                        <Link className='font-medium text-primary hover:text-violet-500 transition-colors duration-300 underline' to='/login'>
                             Sign In
                         </Link>
                     </p>
