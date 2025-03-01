@@ -82,7 +82,7 @@ const SignUp = () => {
     };
     return (
         <AuthLayout>
-            <div className='w-full px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center py-8 sm:py-12'>
+            <div className='w-full px-4 sm:px-6 lg:px-8 flex flex-col justify-center py-8 sm:py-12'>
                 <h3 className={`text-xl sm:text-2xl font-semibold mb-2 transition-colors duration-300 ${
                     isDarkMode ? 'text-white' : 'text-black'
                 }`}>
