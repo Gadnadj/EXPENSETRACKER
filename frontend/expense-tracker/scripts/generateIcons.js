@@ -32,12 +32,13 @@ async function generateIcons() {
             const canvas = createCanvas(size, size);
             const ctx = canvas.getContext('2d');
 
-            // Dégradé de fond (du violet foncé vers du clair)
+            // Dégradé de fond (violet très foncé, presque noir)
             const bgGradient = ctx.createLinearGradient(0, 0, size, size);
-            bgGradient.addColorStop(0, '#5B21B6');
-            bgGradient.addColorStop(1, '#875cf5');
+            bgGradient.addColorStop(0, '#2E1065'); // Violet ultra foncé
+            bgGradient.addColorStop(1, '#4C1D95'); // Violet profond
             ctx.fillStyle = bgGradient;
             ctx.fillRect(0, 0, size, size);
+
 
             // Cercle "flou" pour effet de glassmorphism
             // ctx.beginPath();
