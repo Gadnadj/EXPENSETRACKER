@@ -13,11 +13,11 @@ const Navbar = ({ activeMenu }: Props) => {
     const [openSideMenu, setOpenSideMenu] = useState(false);
 
     return (
-        <nav className={`flex items-center justify-between backdrop-blur-[2px] py-4 px-7 fixed w-full top-0 left-0 right-0 z-[9999] transition-all duration-300 border-b ${
+        <div className={`flex items-center justify-between backdrop-blur-[2px] py-4 px-7 sticky top-0 z-30 transition-all duration-300 border-b ${
             isDarkMode 
-                ? 'bg-gray-800/100 border-gray-700' 
-                : 'bg-white/100 border-gray-200/50'
-        }`} style={{ WebkitTransform: 'translate3d(0,0,0)' }}>
+                ? 'bg-gray-800 border-gray-700' 
+                : 'bg-white border-gray-200/50'
+        }`}>
             <div className="flex items-center gap-5">
                 <button
                     className={`block lg:hidden transition-colors duration-300 ${
@@ -70,7 +70,7 @@ const Navbar = ({ activeMenu }: Props) => {
                     <SideMenu activeMenu={activeMenu} />
                 </div>
             )}
-        </nav>
+        </div>
     );
 };
 
