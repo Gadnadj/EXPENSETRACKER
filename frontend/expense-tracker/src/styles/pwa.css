@@ -1,0 +1,22 @@
+/* Safe area padding for iOS PWA */
+:root {
+  --sat: env(safe-area-inset-top);
+  --sab: env(safe-area-inset-bottom);
+  --sal: env(safe-area-inset-left);
+  --sar: env(safe-area-inset-right);
+}
+
+.safe-top {
+  padding-top: var(--sat);
+}
+
+.pt-safe-top {
+  padding-top: max(var(--sat), 0px);
+}
+
+@supports (-webkit-touch-callout: none) {
+  .fixed {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+} 
