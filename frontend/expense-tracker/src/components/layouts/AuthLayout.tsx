@@ -21,7 +21,7 @@ const AuthLayout = ({ children }: Props) => {
                     <h2 className={`text-lg font-medium transition-colors duration-300  ${
                         isDarkMode ? 'text-white' : 'text-black'
                     }`}>
-                        Expense Tracker <span className="hidden sm:inline "></span>
+                        Finance Tracker <span className="hidden sm:inline "></span>
                     </h2>
                     <ThemeToggle />
                 </div>

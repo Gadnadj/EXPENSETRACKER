@@ -38,7 +38,7 @@ const Navbar = ({ activeMenu }: Props) => {
                 <h2 className={`text-xl md:text-lg font-medium transition-colors duration-300 ${isPWA ? 'mt-[30px]' : ''}  ${
                     isDarkMode ? 'text-white' : 'text-gray-900'
                 }`}>
-                    Expense Tracker
+                    Finance Tracker
                 </h2>
             </div>
 
