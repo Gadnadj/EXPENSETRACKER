@@ -99,7 +99,7 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }: Pr
             </ResponsiveContainer>
 
             {showTextAnchor && (
-                <div className='absolute flex flex-col items-center justify-center top-[175px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none'>
+                <div className='absolute flex flex-col items-center justify-center top-[159px] md:top-[175px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none'>
                     <p className={`text-sm mb-1 transition-colors duration-300 ${
                         isDarkMode ? 'text-gray-400' : 'text-gray-600'
                     }`}>
