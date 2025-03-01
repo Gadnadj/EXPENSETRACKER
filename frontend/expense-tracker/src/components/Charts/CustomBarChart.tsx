@@ -82,7 +82,7 @@ const CustomBarChart = ({ data }: Props) => {
                         position={{ y: -50 }}
                         wrapperStyle={{ 
                             zIndex: 100,
-                            touchAction: 'none'
+                            pointerEvents: 'none'
                         }}
                     />
                     <Bar 

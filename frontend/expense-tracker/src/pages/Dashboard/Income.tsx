@@ -12,8 +12,10 @@ import DeleteAlert from '../../components/DeleteAlert';
 import Loading from '../../components/Loading';
 import { ThemeContext } from '../../context/ThemeContext';
 import gsap from 'gsap';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 const Income = () => {
+    useScrollToTop();
     const { isDarkMode } = useContext(ThemeContext);
     const [incomeData, setIncomeData] = useState<Income[]>([]);
     const [loading, setLoading] = useState(true);

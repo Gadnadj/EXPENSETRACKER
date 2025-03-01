@@ -88,7 +88,7 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }: Pr
                         content={<CustomTooltip />}
                         wrapperStyle={{ 
                             zIndex: 100,
-                            touchAction: 'none'
+                            pointerEvents: 'none'
                         }}
                         allowEscapeViewBox={{ x: true, y: true }}
                         position={{ y: -50 }}
