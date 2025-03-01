@@ -29,35 +29,39 @@ async function generateIcons() {
         for (const { size, name } of sizes) {
             console.log(`\n📏 Generating ${name} (${size}x${size})...`);
 
-            // Créer un canvas pour chaque taille
             const canvas = createCanvas(size, size);
             const ctx = canvas.getContext('2d');
 
-            // Fond violet (purple-800)
-            ctx.fillStyle = '#5B21B6';
-            ctx.beginPath();
-            ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
-            ctx.fill();
+            // Dégradé de fond (du violet foncé vers du clair)
+            const bgGradient = ctx.createLinearGradient(0, 0, size, size);
+            bgGradient.addColorStop(0, '#5B21B6');
+            bgGradient.addColorStop(1, '#875cf5');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, size, size);
 
-            // Ajouter un effet de brillance
-            const gradient = ctx.createRadialGradient(
-                size * 0.3, size * 0.3, size * 0.1,
-                size * 0.5, size * 0.5, size * 0.7
-            );
-            gradient.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
-            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-            ctx.fillStyle = gradient;
-            ctx.fill();
+            // Cercle "flou" pour effet de glassmorphism
+            // ctx.beginPath();
+            // ctx.arc(size / 2, size / 2, size * 0.4, 0, Math.PI * 2);
+            // ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            // ctx.filter = 'blur(15px)';
+            // ctx.fill();
+            // ctx.filter = 'none'; // Reset le filtre pour le reste des dessins
 
-            // Définir le style du texte (super grand : 75% de la taille)
-            const fontSize = size * 0.55;
+            // Ombre portée pour le texte
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+            ctx.shadowBlur = size * 0.1;
+            ctx.shadowOffsetX = size * 0.05;
+            ctx.shadowOffsetY = size * 0.05;
+
+            // Style du texte ultra grand et moderne
+            const fontSize = size * 0.6;
             ctx.font = `bold ${fontSize}px Inter, Arial, sans-serif`;
             ctx.fillStyle = '#FFFFFF';
             ctx.textBaseline = 'middle';
             ctx.textAlign = 'center';
 
-            // Dessiner le texte centré
-            ctx.fillText('E', size / 2, size / 2);
+            // Texte centré "ET"
+            ctx.fillText('ET', size / 2, size / 2);
 
             // Convertir le canvas en buffer
             const buffer = canvas.toBuffer('image/png');
