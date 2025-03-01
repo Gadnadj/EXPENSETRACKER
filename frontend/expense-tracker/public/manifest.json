@@ -1,5 +1,5 @@
 {
-  "short_name": "ExpenseTracker",
+  "short_name": "Expense Tracker",
   "name": "Expense Tracker App",
   "description": "Track your income and expenses easily",
   "icons": [
@@ -21,7 +21,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#875cf5",
   "background_color": "#ffffff",
