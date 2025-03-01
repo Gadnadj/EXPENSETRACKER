@@ -66,7 +66,7 @@ const Navbar = ({ activeMenu }: Props) => {
             </button>
 
             {openSideMenu && (
-                <div className={`fixed ${isPWA ? 'top-[96px]' : 'top-24 md:top-[73px]'} left-0 right-0 bottom-0 lg:hidden transition-all duration-300 ${
+                <div className={`fixed ${isPWA ? 'top-[96px]' : 'top-[73px] md:top-[73px]'} left-0 right-0 bottom-0 lg:hidden transition-all duration-300 ${
                     isDarkMode ? 'bg-gray-800' : 'bg-white'
                 }`}>
                     <SideMenu activeMenu={activeMenu} />
