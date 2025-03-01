@@ -53,6 +53,7 @@ function App() {
         </Router>
 
         <Toaster
+          position='top-right'
           toastOptions={{
             className: '',
             style: {

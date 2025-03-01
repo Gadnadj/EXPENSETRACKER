@@ -47,7 +47,6 @@ const RecentIncome = ({ transactions, onSeeMore }: Props) => {
                         date={moment(item.date).format('Do MMM YYYY')}
                         amount={item.amount}
                         type='income'
-                        hideDeleteBtn
                     />
                 ))}
                 {(!transactions || transactions.length === 0) && (

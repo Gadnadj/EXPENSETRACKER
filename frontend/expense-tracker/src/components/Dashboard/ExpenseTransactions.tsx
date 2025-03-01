@@ -47,7 +47,6 @@ const ExpenseTransactions = ({ transactions, onSeeMore }: Props) => {
                         date={moment(item.date).format('Do MMM YYYY')}
                         amount={item.amount}
                         type='expense'
-                        hideDeleteBtn
                     />
                 ))}
                 {(!transactions || transactions.length === 0) && (

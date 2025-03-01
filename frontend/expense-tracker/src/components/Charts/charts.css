@@ -1,0 +1,23 @@
+/* Styles pour améliorer l'expérience mobile des graphiques */
+@media (max-width: 768px) {
+    .recharts-tooltip-wrapper {
+        transition: opacity 0.3s ease-in-out !important;
+    }
+
+    .recharts-tooltip-wrapper.recharts-tooltip-wrapper-right,
+    .recharts-tooltip-wrapper.recharts-tooltip-wrapper-left {
+        transform: translate(0, -50%) !important;
+    }
+
+    .recharts-sector,
+    .recharts-bar-rectangle {
+        touch-action: none;
+        cursor: pointer;
+    }
+
+    /* Augmenter la zone de touch */
+    .recharts-wrapper {
+        touch-action: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+} 

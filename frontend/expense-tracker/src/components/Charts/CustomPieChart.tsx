@@ -1,6 +1,7 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import './charts.css';
 
 type Props = {
     data: Array<{ name: string; amount: number }>;
@@ -85,7 +86,12 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }: Pr
                     </Pie>
                     <Tooltip 
                         content={<CustomTooltip />}
-                        wrapperStyle={{ zIndex: 100 }}
+                        wrapperStyle={{ 
+                            zIndex: 100,
+                            touchAction: 'none'
+                        }}
+                        allowEscapeViewBox={{ x: true, y: true }}
+                        position={{ y: -50 }}
                         cursor={{ fill: 'none' }}
                     />
                     <Legend content={<CustomLegend />} />

@@ -41,10 +41,10 @@ const ExpenseOverview = ({ transactions, onExpenseIncome }: Props) => {
                 </div>
 
                 <button 
-                    className={`group flex items-center gap-3 px-4 py-1.5 rounded-lg cursor-pointer transform hover:scale-[1.02] transition-all duration-300 ${
+                    className={`flex items-center gap-1.5 text-xs md:text-sm font-medium whitespace-nowrap px-4 py-2 rounded-lg cursor-pointer transition-colors duration-300 ${
                         isDarkMode 
-                            ? 'text-gray-300 hover:text-purple-400 bg-gray-700/50 hover:bg-purple-900/30 border-gray-600/50 hover:border-purple-500/30' 
-                            : 'text-gray-700 hover:text-purple-600 bg-gray-50 hover:bg-purple-50 border-gray-200/50 hover:border-purple-200'
+                            ? 'text-purple-400 hover:text-gray-200 bg-gray-800 hover:bg-gray-700 border-gray-700' 
+                            : 'text-purple-600 hover:text-gray-700 bg-purple-50 hover:bg-gray-50 border-purple-100'
                     }`} 
                     onClick={onExpenseIncome}
                 >

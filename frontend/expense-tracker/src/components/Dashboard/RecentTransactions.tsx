@@ -26,16 +26,6 @@ const RecentTransactions = ({ transactions, onSeeMore }: Props) => {
                     Recent Transactions
                 </h5>
 
-                <button 
-                    className={`flex items-center gap-3 px-4 py-1.5 rounded-lg cursor-pointer transform hover:scale-[1.02] transition-all duration-300 ${
-                        isDarkMode 
-                            ? 'text-gray-300 hover:text-purple-400 bg-gray-700/50 hover:bg-purple-900/30 border-gray-600/50 hover:border-purple-500/30' 
-                            : 'text-gray-700 hover:text-purple-600 bg-gray-50 hover:bg-purple-50 border-gray-200/50 hover:border-purple-200'
-                    }`} 
-                    onClick={onSeeMore}
-                >
-                    See All <LuArrowRight className='text-base transition-colors duration-300' />
-                </button>
             </div>
 
             <div className='mt-6 space-y-4'>
@@ -47,7 +37,6 @@ const RecentTransactions = ({ transactions, onSeeMore }: Props) => {
                         date={moment(item.date).format('Do MMM YYYY')}
                         amount={item.amount}
                         type={'source' in item ? 'income' : 'expense'}
-                        hideDeleteBtn
                     />
                 ))}
                 {(!transactions || transactions.length === 0) && (

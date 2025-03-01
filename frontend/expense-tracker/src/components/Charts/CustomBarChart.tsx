@@ -1,6 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import './charts.css';
 
 type Props = {
     data: { category: string, amount: number }[] | { month: string; amount: number; source: string; }[]
@@ -77,6 +78,12 @@ const CustomBarChart = ({ data }: Props) => {
                     <Tooltip 
                         content={<CustomTooltip />}
                         cursor={false}
+                        allowEscapeViewBox={{ x: true, y: true }}
+                        position={{ y: -50 }}
+                        wrapperStyle={{ 
+                            zIndex: 100,
+                            touchAction: 'none'
+                        }}
                     />
                     <Bar 
                         dataKey='amount'

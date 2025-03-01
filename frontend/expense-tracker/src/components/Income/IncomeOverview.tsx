@@ -54,7 +54,15 @@ const IncomeOverview = ({ transactions, onAddIncome }: Props) => {
             </div>
 
             <div className='mt-10'>
-                <CustomBarChart data={chartData} />
+                {chartData.length > 0 ? (
+                    <CustomBarChart data={chartData} />
+                ) : (
+                    <div className={`flex items-center justify-center h-[300px] transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`}>
+                        No income data available
+                    </div>
+                )}
             </div>
         </div>
     );

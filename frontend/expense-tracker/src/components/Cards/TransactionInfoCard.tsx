@@ -72,8 +72,8 @@ const TransactionInfoCard = ({ title, icon, date, amount, type, hideDeleteBtn, o
                         </button>
                     )}
 
-                    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-md w-[110px] transition-colors duration-300 ${getAmountStyles()}`}>
-                        <h6 className='text-xs font-medium'>
+                    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-md min-w-[110px] w-auto transition-colors duration-300 ${getAmountStyles()}`}>
+                        <h6 className='text-xs font-medium whitespace-nowrap'>
                             {type === 'income' ? '+' : '-'} ${amount}
                         </h6>
                         {type === 'income' ? <LuTrendingUp /> : <LuTrendingDown />}
