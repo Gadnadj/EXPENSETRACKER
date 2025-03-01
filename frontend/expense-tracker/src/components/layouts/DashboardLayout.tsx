@@ -17,11 +17,9 @@ const DashboardLayout = ({ children, activeMenu }: Props) => {
         <div className={`min-h-screen flex flex-col transition-colors duration-300 ${
             isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
         }`}>
-            <div className="fixed top-0 left-0 right-0 z-50">
-                <Navbar activeMenu={activeMenu} />
-            </div>
+            <Navbar activeMenu={activeMenu} />
             {user && (
-                <div className='flex mt-[73px]'>
+                <main className='flex mt-24 md:mt-[73px]'>
                     <div className='max-[1080px]:hidden'>
                         <SideMenu activeMenu={activeMenu} />
                     </div>
@@ -29,7 +27,7 @@ const DashboardLayout = ({ children, activeMenu }: Props) => {
                     <div className='grow mx-5'>
                         {children}
                     </div>
-                </div>
+                </main>
             )}
         </div>
     );

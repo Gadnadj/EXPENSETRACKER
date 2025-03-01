@@ -13,11 +13,11 @@ const Navbar = ({ activeMenu }: Props) => {
     const [openSideMenu, setOpenSideMenu] = useState(false);
 
     return (
-        <div className={`flex items-center justify-between backdrop-blur-[2px] py-4 px-7 sticky top-0 z-30 transition-all duration-300 border-b ${
+        <nav className={`flex items-center justify-between backdrop-blur-[2px] py-4 md:py-4 h-24 md:h-[73px] px-7 fixed w-full top-0 left-0 right-0 z-[9999] transition-all duration-300 border-b ${
             isDarkMode 
-                ? 'bg-gray-800 border-gray-700' 
-                : 'bg-white border-gray-200/50'
-        }`}>
+                ? 'bg-gray-800/100 border-gray-700' 
+                : 'bg-white/100 border-gray-200/50'
+        }`} style={{ WebkitTransform: 'translate3d(0,0,0)' }}>
             <div className="flex items-center gap-5">
                 <button
                     className={`block lg:hidden transition-colors duration-300 ${
@@ -26,14 +26,14 @@ const Navbar = ({ activeMenu }: Props) => {
                     onClick={() => setOpenSideMenu(!openSideMenu)}>
                     {
                         openSideMenu ? (
-                            <HiOutlineX className='text-2xl' />
+                            <HiOutlineX className='text-3xl md:text-2xl' />
                         ) : (
-                            <HiOutlineMenu className='text-2xl' />
+                            <HiOutlineMenu className='text-3xl md:text-2xl' />
                         )
                     }
                 </button>
 
-                <h2 className={`text-lg font-medium transition-colors duration-300 ${
+                <h2 className={`text-xl md:text-lg font-medium transition-colors duration-300 ${
                     isDarkMode ? 'text-white' : 'text-gray-900'
                 }`}>
                     Expense Tracker
@@ -49,7 +49,7 @@ const Navbar = ({ activeMenu }: Props) => {
                 }`}
                 aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             >
-                <div className="relative w-5 h-5">
+                <div className="relative w-6 h-6 md:w-5 md:h-5">
                     <LuSun
                         className={`absolute w-full h-full text-yellow-500 transition-all duration-300 ${
                             isDarkMode ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'
@@ -64,13 +64,13 @@ const Navbar = ({ activeMenu }: Props) => {
             </button>
 
             {openSideMenu && (
-                <div className={`fixed top-[61px] left-0 right-0 bottom-0 lg:hidden transition-all duration-300 ${
+                <div className={`fixed top-24 md:top-[73px] left-0 right-0 bottom-0 lg:hidden transition-all duration-300 ${
                     isDarkMode ? 'bg-gray-800' : 'bg-white'
                 }`}>
                     <SideMenu activeMenu={activeMenu} />
                 </div>
             )}
-        </div>
+        </nav>
     );
 };
 
