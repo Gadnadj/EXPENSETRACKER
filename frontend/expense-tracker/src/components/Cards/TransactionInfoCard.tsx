@@ -61,7 +61,7 @@ const TransactionInfoCard = ({ title, icon, date, amount, type, hideDeleteBtn, o
                 <div className='flex items-center gap-2'>
                     {hideDeleteBtn && (
                         <button 
-                            className={`opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer ${
+                            className={`md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 cursor-pointer ${
                                 isDarkMode 
                                     ? 'text-gray-500 hover:text-red-400' 
                                     : 'text-gray-400 hover:text-red-500'
