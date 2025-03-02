@@ -65,7 +65,7 @@ const AddIncomeForm = ({ onAddIncome }: Props) => {
                     }`}
                     onClick={() => onAddIncome({ 
                         ...incomeData, 
-                        amount: parseInt(incomeData.amount), 
+                        amount: parseFloat(incomeData.amount), 
                         date: new Date(incomeData.date) 
                     })}
                 >

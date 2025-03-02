@@ -65,7 +65,7 @@ const AddExpenseForm = ({ onAddExpense }: Props) => {
                     }`}
                     onClick={() => onAddExpense({ 
                         ...expenseData, 
-                        amount: parseInt(expenseData.amount), 
+                        amount: parseFloat(expenseData.amount), 
                         date: new Date(expenseData.date) 
                     })}
                 >
